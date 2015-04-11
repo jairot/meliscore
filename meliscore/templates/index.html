@@ -1,7 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-    Hola! Bienvenido a MELIScore.
-    <br>
-    Estamos trabajando para tus ventas.
+    <p>Ingres&aacute; la URL de tu producto publicado en <a href="http://mercadolibre.com.ar">MercadoLibre</a> para verificar tu scoring.</p>
+
+    <form class="form-horizontal group-border stripped" role="form"
+          action="{% url 'score' %}" method="post">
+          {% csrf_token %}
+    <div class="form-group">
+        <div class="col-lg-12 col-md-12">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="URL de tu articulo">
+                        <span class="input-group-btn">
+                            <button class="btn btn-teal" type="submit">Score it!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
 {% endblock content %}
