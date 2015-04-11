@@ -51,11 +51,15 @@ def generate_scores(itemid):
     }
 
     # traer user score
+    seller_id = item_data['seller_id']
+    url = URL_BASE + "users/%d" % seller_id
+    user_data = requests.get(url).json()
+    
+    score, tip = get_user_score(user_data)
     partial["user_score"] = {
-        "score": 0,
-        "tip": "Media pila che!"
+        "score": score,
+        "tip": tip
     }
-
 
     # calcular score final
     result = {
@@ -65,8 +69,23 @@ def generate_scores(itemid):
 
     return result
 
+
+def get_user_score(user_data):
+    user_level = int(user_data["seller_reputation"]["level_id"][0])
+    score = user_level * 1.0 / 5
+    if user_level < 3:
+        tip = "Flojísimo!"
+    elif user_level < 4:
+        tip = "Va queriendo"
+    else:
+        tip = "bien ahí!"
+
+    return score, tip
+
+
 def get_total_score(partial_scores):
     return average([p["score"] for p in partial_scores.values()])
+
 
 if __name__ == '__main__':
     # URL ejemplo
