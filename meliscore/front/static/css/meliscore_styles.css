@@ -4,5 +4,38 @@
 */
 
 body {
+    font-size: 16px;
+    font-family: "Raleway", "Helvetica Neue", "Arial", sans;
+    margin: 0 auto;
+    max-width: 95%;
+    width: 900px;
 
+    @media (max-width: 900px) {
+        margin: 0 1em;
+    }
+}
+
+header {
+    height: 4em;
+    padding: 1em 0;
+}
+header h1 {
+    float: left;
+    margin: 0;
+}
+
+.ml_logo_container {
+    float: right;
+}
+.ml_logo_container img {
+    max-height: 2em;
+}
+
+.main-content {
+    padding: 1em 0;
+}
+
+.meliscore_chart {
+    height: 140px;
+    width: 140px;
 }
