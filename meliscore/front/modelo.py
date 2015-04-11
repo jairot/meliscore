@@ -4,8 +4,7 @@ from scipy import average
 import requests
 import re
 from string import punctuation
-
-URL_BASE = "https://api.mercadolibre.com/"
+from queries import get_item, get_item_description, get_user
 
 def generate_scores(itemid):
     """
@@ -23,38 +22,20 @@ def generate_scores(itemid):
     """
     partial = {}
 
-    # traer item
-    url = URL_BASE + "items/" + itemid
-    res = requests.get(url)
-    item_data = res.json()
-
+    # photo score 
+    item_data = get_item(itemid)
     score, tip =  get_photo_score(item_data)
-    partial["photo"] = {
-        "score": score,
-        "tip": tip
-    }
-    
-    # traer descripción
-    url_description = URL_BASE + 'items/' + itemid + '/description'
-    response_description = requests.get (URL_BASE + 'items/' + itemid + '/description')
-    description=response_description.json()
-    score = get_description_score(description)
+    partial["photo"] = {"score": score, "tip": tip}
 
-    partial["description"] = {
-        "score": score,
-        "tip": "Media pila che!"
-    }
+    # description score
+    description = get_item_description(itemid)
+    score, tip = get_description_score(description)
+    partial["description"] = {"score": score, "tip": tip}
 
-    # traer user score
-    seller_id = item_data['seller_id']
-    url = URL_BASE + "users/%d" % seller_id
-    user_data = requests.get(url).json()
-    
+    # user score
+    user_data = get_user(item_data['seller_id'])
     score, tip = get_user_score(user_data)
-    partial["user_score"] = {
-        "score": score,
-        "tip": tip
-    }
+    partial["user_score"] = {"score": score, "tip": tip}
 
     # calcular score final
     result = {
@@ -63,10 +44,6 @@ def generate_scores(itemid):
     }    
 
     return result
-
-
-def get_description_score(desc_data):
-    return 0, ""
 
 
 def get_photo_score(item_data):
@@ -96,13 +73,13 @@ def get_user_score(user_data):
     return score, tip
 
 
-def get_total_score(partial_scores):
-    return average([p["score"] for p in partial_scores.values()])
-
-def count_images_from_description (description):
+def count_images_from_description(description):
     return len(re.findall(r'img src', description['text']))
+
     
 def get_description_score(description):
+    MAX_DESC_LEN = 1000
+
     text = description["plain_text"]
     if (not text):
         strcount= 0
@@ -113,7 +90,22 @@ def get_description_score(description):
         newstr = r.sub(' ', text)
         strcount = len(newstr.split())
     imgcount = count_images_from_description(description)
-    return strcount + imgcount * 100
+    desc_len = strcount + imgcount * 100
+    score = min(desc_len, MAX_DESC_LEN) * 1.0 / MAX_DESC_LEN
+    if score <= 0.5:
+        tip = "Explayate un poco más!"
+    elif score <= 0.8:
+        tip = "Zafa"
+    else:
+        tip = "De lujo"
+
+    return score, tip
+
+
+def get_total_score(partial_scores):
+    return average([p["score"] for p in partial_scores.values()])
+
+
 
 
 if __name__ == '__main__':
