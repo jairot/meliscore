@@ -1,0 +1,373 @@
+/* -----------------------------------------
+   Responsive media queries
+----------------------------------------- */
+
+/* -----------------------------------------
+   Big screens
+----------------------------------------- */
+@media all and (max-width: 9999px)  {
+	
+}
+
+/* -----------------------------------------
+   Desktops
+----------------------------------------- */
+@media all and (max-width: 1366px) {
+
+	/* ------------------ Offline page --------------------*/
+	body.error-page h1.offline-page {font-size: 10em;}
+
+}
+
+/* -----------------------------------------
+   Tablets and some phones
+----------------------------------------- */
+@media all and (max-width: 991px)  {
+	/* ------------------ Header --------------------*/
+	#header {
+		.navbar {
+			.navbar-brand {
+				width: auto;
+				padding-right: 15px;
+			}
+			#top-nav {
+				float: right;
+				.clearfix();
+				.navbar-form {
+					&.show {
+						display: inline-block !important;
+						position: absolute;
+						left: 70px;
+						top: 0;
+						right:0;
+						border-top: none;
+						border-bottom: none;
+						z-index: 10;
+						.form-group {
+							margin-bottom: 0;
+						}
+					}
+				}		
+			}
+		}
+	}
+	/* ------------------ Dual list --------------------*/
+	.bootstrap-duallistbox-container {
+		.box2 {margin-top: 10px;}
+	}
+	/* ------------------ Form grid --------------------*/
+	.form-group .row .form-control,
+	.form-group .row .input-group,
+	.form-group .row .ui-spinner {
+		margin-bottom: 10px;
+	}
+
+	.form-group .row .input-group .form-control,
+	.form-group .row .ui-spinner .form-control  {
+		margin-bottom: 0;
+	}
+
+	.form-horizontal,
+	.form-vertical {
+		.control-label {
+			text-align: left;
+			margin-bottom: 10px;
+		}
+	}
+
+	/* ------------------ Datatables --------------------*/
+	.table-responsive {
+		.dataTables_wrapper {
+			padding-top: 10px;
+		}
+	}
+
+	.dataTable {
+		margin-bottom: 15px;
+	}
+
+	.dataTables_wrapper {
+		.dataTables_length {
+			float: none;
+			margin-bottom: 5px;
+			text-align: center;
+		}
+
+		.dataTables_filter {
+			float: none;
+			text-align: center;
+			margin-top: 10px;
+		}
+
+		.dataTables_info {
+			float: none;
+			text-align: center;
+			margin-bottom: 0;
+		}
+
+		.dataTables_paginate {
+			float: none;
+			text-align: center;
+			margin-top: 10px;
+			.pagination {
+				float: none;
+			}
+		}
+	}
+
+	/* ------------------ Pagination--------------------*/
+	.pagination {
+		margin-bottom: 0;
+		>li > a {margin-bottom: 10px;}
+	}
+
+	/* ------------------ Login page --------------------*/
+	body.login-page #login {
+		margin-top: 100px;
+	}
+}
+
+/* -----------------------------------------
+   Most phones
+----------------------------------------- */
+@media all and (max-width: 767px) {
+	/* ------------------ Header --------------------*/
+	#header {
+		.navbar {
+			.navbar-header {
+				float: left;
+				.navbar-toggle {margin-left: 15px;}
+			}
+			#top-nav {	
+				.navbar-nav {
+					margin: 0;
+					li {
+						display: inline-block;
+					}
+					>li>a {float: left;}
+
+					.open {
+						.dropdown-menu {
+							margin-top: -3px;
+							max-height: 300px;
+							overflow: auto;
+							position: absolute;
+							float: left;
+							background-color: @dropdown-bg;
+							border: 3px solid @dropdown-fallback-border;
+							border: 3px solid @dropdown-border;
+							li {
+								width: 100%;
+								.dropdown-menu-header {padding-bottom: 0 !important;}
+								.view-all {margin-top: -5px;}
+								padding: 1px 5px;
+								&:first-child,
+								&:last-child {padding: 5px;}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	/* ------------------  Sidebar  --------------------*/
+	#sidebar .sidebar-inner .toggle-sidebar {display: none;}
+	/* ------------------ Center modal --------------------*/
+	.modal-dialog-center {
+		width: 100%;
+	}
+	/* ------------------ Full calendar --------------------*/
+	.fc-header-left,
+	.fc-header-center,
+	.fc-header-right {
+		float: left;
+		text-align: center;
+		width: 100%;
+		padding: 0;
+	}
+	.fc-header-left {padding-top: 10px;padding-bottom: 10px; border-bottom: 1px solid @border-color;}
+	.fc-header-center {padding: 5px 0;}
+	.fc-header-right {padding-bottom: 10px; padding-top: 10px; border-top: 1px solid @border-color;}
+
+	/* ------------------ Form grid --------------------*/
+	.form-group .row .form-control,
+	.form-group .row .input-group,
+	.form-group .row .ui-spinner {
+		margin-bottom: 10px;
+	}
+
+	.form-group .row .input-group .form-control,
+	.form-group .row .ui-spinner .form-control  {
+		margin-bottom: 0;
+	}
+
+	.form-horizontal,
+	.form-vertical {
+		.control-label {
+			text-align: left;
+			margin-bottom: 10px;
+		}
+	}
+	
+	/* ------------------ Dual list --------------------*/
+	.bootstrap-duallistbox-container {
+		.box2 {margin-top: 10px;}
+	}
+
+	/* ------------------ Justified nav tabs --------------------*/
+	.nav-tabs {
+		&.nav-justified {
+			li {
+				a {border-right-width: 1px;}
+				&.active {
+					a {border-right-width: 1px;}
+				}
+				&:last-child {
+					a {margin-bottom: 0;}
+				}
+			}
+		}
+	}
+
+	/* ------------------ Offline page --------------------*/
+	body.error-page h1.offline-page {font-size: 7em;}
+
+	/* ------------------ Email app --------------------*/
+	.email-list {padding-left: 0;padding-right: 0;}
+
+	/* ------------------ Timeline --------------------*/
+	.timeline-twoside li.right-side .date-time {padding-right: 55%;}
+}
+
+/* -----------------------------------------
+   Small devices
+----------------------------------------- */
+@media all and (max-width: 640px) {
+	/* ------------------ Wizard styles --------------------*/
+	.form-wizard {
+		.wizard-steps {
+			.wstep {
+				width: 100%; 
+				margin-right: 0;
+				margin-bottom: 5px;
+				padding-top: 5px;
+				border-bottom: 1px solid @border-color;
+				.donut {margin-left: auto;margin-right: auto;}
+				.txt {width: 100%; display: inline-block; margin-bottom: 5px;}
+				&:after {display: none;}
+			}
+		}
+
+		&.wizard-vertical {
+			.wizard-steps {
+				.wstep {
+					width: 100%; 
+					margin-right: 0;
+					margin-bottom: 5px;
+					padding-top: 5px;
+					border-bottom: 1px solid @border-color;
+					.donut {margin-left: auto;margin-right: auto; float: none;}
+					.txt {width: 100%; display: inline-block; margin-bottom: 5px;}
+					&:after {display: none;}
+				}
+				&.show {
+					width: 100%;
+					margin-right: 0;
+					float: none;
+					border-right: none;
+				}
+			}
+			.wrap {padding-left: 0;}
+			.wizard-actions {padding-left: 0;}
+		}
+	}
+
+	/* ------------------ Email app --------------------*/
+	.email-toolbar div[role=toolbar] {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.email-pager {
+		width: 100%;
+		padding-left: 0;
+		margin-bottom: 10px;
+	}
+
+	/* ------------------ Gallery  --------------------*/
+	button.filter,
+	span.sort {margin-bottom: 10px;}
+	.gallery-toolbar {text-align: center;}
+}
+
+/* -----------------------------------------
+   Small devices
+----------------------------------------- */
+@media all and (max-width: 500px) {
+	/*Header*/
+	#header {
+		.navbar {
+			padding-right: 0;
+			#top-nav {
+				width: 100%;
+				float: none;
+				text-align: center;
+				.navbar-nav {
+					float: none !important;
+					li {
+						> a {padding: 0 15px;}
+					}
+					.avatar-name {display: none;}
+				}
+			}
+		}
+	}
+	/*Breadcrumb*/
+	#content .content-wrapper #page-heading #crumb {display: none;}
+
+	/* ------------------ Error pages --------------------*/
+	body.error-page h1.error-number {font-size: 12em;}
+	body.error-page .btn-group a {
+		width: 100%;
+		border-radius: @border-radius-base;
+	}
+
+	/* ------------------ Offline page --------------------*/
+	body.error-page h1.offline-page {font-size: 5em;}
+
+	/* ------------------ Email app --------------------*/
+	#email-content {padding-left: 0;padding-right: 0;}
+	.email-select,
+	.email-star {width: 30px !important;}
+
+	/* ------------------ Login page --------------------*/
+	body.login-page #login {
+		width: 400px;
+	}
+}
+
+/* -----------------------------------------
+   Small devices
+----------------------------------------- */
+@media all and (max-width: 420px) {
+	/* Header */
+	#header .navbar #top-nav .navbar-nav li a {padding: 0 10px;}
+	/* ------------------ Filestyle --------------------*/
+	.bootstrap-filestyle label {margin-top: 10px;}
+
+	/* ------------------ Login page --------------------*/
+	body.login-page #login {
+		width: 360px;
+	}
+}
+
+/* -----------------------------------------
+   Crapy phones
+----------------------------------------- */
+@media all and (max-width: 320px) {
+
+	/* ------------------ Login page --------------------*/
+	body.login-page #login {
+		width: 300px;
+	}
+
+}

@@ -1,0 +1,70 @@
+/* -----------------------------------------
+   Content
+----------------------------------------- */
+#content {
+	margin-left: @sidebarWidth;
+	padding: @headerHeight 0 0 0;
+	min-height: 100%;
+	
+	&.sidebar-page {
+		margin-left: @sidebarWidth;
+	}
+
+	&.collapsed-sidebar {
+		margin-left: @sidebarCollapseWidth;
+	}
+
+	&.full-page {
+		margin-left: 0;
+	}
+
+	&.overLap {
+		margin-left: 0;
+	}
+
+	&.offCanvas {
+		width: 100%;
+		margin-left: @sidebarWidth;
+	}
+	
+	.content-wrapper {
+		height: auto;
+		float: left;
+		width: 100%;
+		position: relative;
+
+		#page-heading {
+			padding: 15px @contentPadding;
+			position: relative;
+			margin: 0;
+			background-color: darken(@body-bg, 5%);
+			border-bottom: 1px solid @white;
+			>h2 {
+				margin: 0;
+				font-size: 20px;
+				font-weight: 400;
+				letter-spacing: 0.5px;
+
+				>i {font-size: 16px;}
+			}
+
+			#crumb {
+				margin: 0;
+				position: absolute;
+				right: @contentPadding;
+				top: 8px;
+				background: transparent;
+				font-size: 14px;
+				li {
+					>i {margin-right: 8px;}
+					a {padding-right: 5px;}
+				}
+			}
+		}
+
+		.content-inner {
+			position: relative;
+			padding: 15px @contentPadding;
+		}
+	}
+}

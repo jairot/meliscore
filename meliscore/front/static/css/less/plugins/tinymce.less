@@ -1,0 +1,202 @@
+/* -----------------------------------------
+   Tinymce
+----------------------------------------- */
+/* TinyMCE widgets/containers */
+.mce-container,
+.mce-container *,
+.mce-widget,
+.mce-widget * {
+    color: @text-color;
+    font-family: @font-family-base;
+}
+
+.mce-window {
+    border-radius: @border-radius-base;
+    -webkit-box-shadow: 0 3px 6px rgba( 0, 0, 0, 0.3 );
+    box-shadow: 0 3px 6px rgba( 0, 0, 0, 0.3 );
+    -webkit-font-smoothing: subpixel-antialiased;
+
+    .mce-container-body {
+        &.mce-abs-layout {overflow: visible;}
+    }
+
+    .mce-window-head {
+        background: @gray-lighter;
+        border-bottom: 1px solid @border-color;
+        padding: 0;
+        min-height: 36px;
+        border-top-left-radius: @border-radius-base;
+        border-top-right-radius: @border-radius-base;
+
+        .mce-title {
+            color: @text-color;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 36px;
+            margin: 0;
+            padding: 0 36px 0 16px;
+        }
+
+        .mce-close {
+            color: transparent;
+            top: 0;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            &:before {
+                text-align: center;
+                color: #666;
+                width: 36px;
+                height: 36px;
+                display: block;
+            }
+            &:hover:before {
+                color: #2ea2cc;
+            }
+        }
+        .mce-dragh {
+            width: -webkit-calc( 100% - 36px );
+            width: calc( 100% - 36px );
+        }
+    }
+}
+
+/* TinyMCE panel */
+div.mce-panel {
+    border: 0;
+    background: #fff;
+    -webkit-filter: none;
+    filter: none;
+
+    .mce-menu {
+        border: none;
+    }
+}
+
+div.mce-tab {
+    line-height: 13px;
+}
+
+/* TinyMCE toolbars */
+div.mce-toolbar-grp {
+    border: 1px solid @border-color;
+    margin-bottom: 8px;
+    background: @white;
+    padding: 0;
+    position: relative;
+    border-radius: @border-radius-base;
+}
+
+.has-dfw div.mce-toolbar-grp .mce-toolbar.mce-first {
+    padding-right: 32px;
+}
+
+.mce-toolbar .mce-btn-group {
+    margin: 0;
+}
+
+div.mce-statusbar {
+    border: 1px solid @border-color !important;
+    padding: 5px 0;
+    margin-top: 8px;
+    border-radius: @border-radius-base;
+}
+
+div.mce-path {
+    padding: 0 8px 2px;
+    margin: 0;
+}
+
+.mce-toolbar .mce-btn,
+.qt-fullscreen {
+    border-color: transparent;
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-shadow: none;
+    cursor: pointer;
+}
+
+.mce-toolbar .mce-btn-group .mce-btn,
+.qt-fullscreen {
+    border: 1px solid transparent;
+    margin: 2px;
+    background-image: none;
+    border-radius: @border-radius-base;
+    -webkit-filter: none;
+    filter: none;
+}
+
+.mce-toolbar .mce-btn-group .mce-btn:hover,
+.mce-toolbar .mce-btn-group .mce-btn:focus,
+.qt-fullscreen:hover,
+.qt-fullscreen:focus {
+    background: @mainColor;
+    border-color: @mainColor;
+    color: @white;
+    box-shadow: none;
+}
+
+.mce-toolbar .mce-btn-group .mce-btn.mce-active,
+.mce-toolbar .mce-btn-group .mce-btn:active{
+    background: @mainColor;
+    border-color: @mainColor;
+    box-shadow: none;
+    color: @white;
+}
+
+.mce-toolbar .mce-btn-group .mce-btn.mce-active:hover {
+    border-color: @mainColor;
+}
+
+.mce-toolbar .mce-btn-group .mce-btn.mce-active:hover i.mce-ico {
+    color: @white;
+}
+
+.mce-toolbar .mce-btn-group .mce-btn.mce-disabled:hover,
+#wp-fullscreen-buttons .mce-btn.mce-disabled:hover,
+.mce-toolbar .mce-btn-group .mce-btn.mce-disabled:focus,
+#wp-fullscreen-buttons .mce-btn.mce-disabled:focus {
+    color: @text-color;
+    background: none;
+    border-color: @border-color;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.mce-toolbar .mce-btn-group .mce-first,
+.mce-toolbar .mce-btn-group .mce-last {
+    border-color: transparent;
+}
+
+.mce-toolbar .mce-btn button,
+.qt-fullscreen {
+    padding: 2px 3px;
+    line-height: normal;
+}
+
+.mce-toolbar .mce-btn i {
+    text-shadow: none;
+    color: @text-color;
+}
+
+.mce-toolbar .mce-btn-group > div {
+    white-space: normal;
+}
+
+.mce-toolbar .mce-colorbutton .mce-open {
+    border-right: 0;
+}
+
+.mce-toolbar .mce-colorbutton .mce-preview {
+    margin-left: -17px;
+    padding: 0;
+    width: 18px;
+}
+
+.mce-edit-area {
+    border-radius: @border-radius-base;
+    border: 1px solid @border-color !important;
+}
