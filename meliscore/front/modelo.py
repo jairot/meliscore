@@ -41,7 +41,7 @@ def generate_scores(itemid):
     result = {
         "total_score": get_total_score(partial),
         "partial_scores": partial
-    }    
+    }
 
     return result
 
@@ -104,8 +104,6 @@ def get_description_score(description):
 
 def get_total_score(partial_scores):
     return average([p["score"] for p in partial_scores.values()])
-
-
 
 
 if __name__ == '__main__':
