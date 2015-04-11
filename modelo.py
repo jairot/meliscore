@@ -69,5 +69,7 @@ def get_total_score(partial_scores):
     return average([p["score"] for p in partial_scores.values()])
 
 if __name__ == '__main__':
-    scores = generate_scores("MLA554189135")
+    # URL ejemplo
+    # http://articulo.mercadolibre.com.ar/MLA-554524325-apple-iphone-6-16gb-factura-a-b-1-ano-gtia-oficial-_JM
+    scores = generate_scores("MLA554524325")
     print scores
