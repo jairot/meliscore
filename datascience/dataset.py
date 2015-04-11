@@ -17,9 +17,23 @@ def simplify_item(item):
 
 def create_dataset(category_id):
     response = requests.get(URL_BASE + 'sites/MLA/search?category=' + category_id)
-    items = response.json()['results']
-    items = [simplify_item(i) for i in items]
-    df = pd.io.json.read_json(json.dumps(items))
+    data = response.json()
+
+    limit = data['paging']['limit']
+    offset = 0
+    items_number = data['paging']['total']
+
+    while (offset < items_number):
+        response = requests.get(URL_BASE + 'sites/MLA/search?category=' + category_id + '&offset=' + str(offset))
+        data = response.json()
+        items = [simplify_item(i) for i in data['results']]
+        page_df = pd.read_json(json.dumps(items))
+        if offset == 0:
+            df = page_df
+        else:
+            df = df.append(page_df)
+        offset += limit
+
     df.to_csv('iphone5_16gb.csv', encoding='utf-8')
     
 
