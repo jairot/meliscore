@@ -4,7 +4,11 @@
 {% block content %}
 
 
-Tu score es {{ score.total_score }}
+Tu score es {{ score.total_score.score }}
+</br>
+{{ score.total_score.title }}
+</br>
+{{ score.total_score.subtitle }}
 </br>
 {% for mykey,myvalue in score.partial_scores.items %}
 

@@ -1,10 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from scipy import average
-import requests
 import re
+
+from scipy import average
 from string import punctuation
 from queries import get_item, get_item_description, get_user
+
+steps = [(10, "Horrible!",
+        "Media pila, mi estimado amigo. Si querés vender más rápidamente, seguí nuestros consejos."),
+ (30, "Muy incompleto.", "Seguí nuestros consejos para mejorar tu publicación."),
+ (55, "Incompleto."," Seguí nuestros consejos para mejorar tu publicación."),
+ (80, "Bastante bien.", "Seguí nuestros consejos para mejorar tu publicación."),
+ (95, "Muy bien!", "Tu venta está prácticamente asegurada. Quedan detalles por pulir para que quede excelente."),
+ (100, "Excelente!!", "Talvez vos puedas darnos consejos a nosotros. Feliz venta!")]
+
 
 def generate_scores(itemid):
     """
@@ -22,7 +31,7 @@ def generate_scores(itemid):
     """
     partial = {}
 
-    # photo score 
+    # photo score
     item_data = get_item(itemid)
     score, tip =  get_photo_score(item_data)
     partial["photo"] = {"score": score, "tip": tip}
@@ -76,7 +85,7 @@ def get_user_score(user_data):
 def count_images_from_description(description):
     return len(re.findall(r'img src', description['text']))
 
-    
+
 def get_description_score(description):
     MAX_DESC_LEN = 1000
 
@@ -103,7 +112,14 @@ def get_description_score(description):
 
 
 def get_total_score(partial_scores):
-    return average([p["score"] for p in partial_scores.values()])
+    score = average([p["score"] for p in partial_scores.values()])*100
+    result = {"score": int(score)}
+    for step in steps:
+        if score < step[0]:
+            result["title"] = step[1]
+            result["subtitle"] = step[2]
+            break
+    return result
 
 
 if __name__ == '__main__':
