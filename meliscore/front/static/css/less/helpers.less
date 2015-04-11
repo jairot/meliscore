@@ -1,0 +1,270 @@
+/* -----------------------------------------
+   Template helpers
+----------------------------------------- */
+
+/* ------------------ Sizes --------------------*/
+.s12 {font-size: 12px !important;}
+.s16 {font-size: 16px !important;}
+.s20 {font-size: 20px !important;}
+.s24 {font-size: 24px !important;}
+.s32 {font-size: 32px !important;}
+.s64 {font-size: 64px !important;}
+
+.vat {vertical-align: top !important;}
+.vam {vertical-align: middle !important;}
+.vab {vertical-align: bottom !important;}
+
+/* ------------------ Margins --------------------*/
+.row.no-padding {
+    margin-left: 0;
+    margin-right: 0;
+    [class^="col-"] {
+        padding: 0;
+    }
+}
+
+.m0 {margin: 0 !important;}
+.m5 {margin: 5px !important;}
+.m10 {margin: 10px !important;}
+.m15 {margin: 15px !important;}
+.m20 {margin: 20px !important;}
+.m25 {margin: 25px !important;}
+
+.mt0 {margin-top: 0 !important;}
+.mt5 {margin-top: 5px !important;}
+.mt10 {margin-top: 10px !important;}
+.mt15 {margin-top: 15px !important;}
+.mt20 {margin-top: 20px !important;}
+.mt25 {margin-top: 25px !important;}
+.mt50 {margin-top: 50px !important;}
+
+.mr0 {margin-right: 0 !important;}
+.mr5 {margin-right: 5px !important;}
+.mr10 {margin-right: 10px !important;}
+.mr15 {margin-right: 15px !important;}
+.mr20 {margin-right: 20px !important;}
+.mr25 {margin-right: 25px !important;}
+
+.mb0 {margin-bottom: 0 !important;}
+.mb5 {margin-bottom: 5px !important;}
+.mb10 {margin-bottom: 10px !important;}
+.mb15 {margin-bottom: 15px !important;}
+.mb20 {margin-bottom: 20px !important;}
+.mb25 {margin-bottom: 25px !important;}
+.mb50 {margin-bottom: 50px !important;}
+
+.ml0 {margin-left: 0 !important;}
+.ml5 {margin-left: 5px !important;}
+.ml10 {margin-left: 10px !important;}
+.ml15 {margin-left: 15px !important;}
+.ml20 {margin-left: 20px !important;}
+.ml25 {margin-left: 25px !important;}
+
+/* ------------------ Paddings --------------------*/
+.p0 {padding: 0 !important;}
+.p5 {padding: 5px !important;}
+.p10 {padding: 10px !important;}
+.p15 {padding: 15px !important;}
+.p20 {padding: 20px !important;}
+.p25 {padding: 25px !important;}
+
+.pt0 {padding-top: 0 !important;}
+.pt5 {padding-top: 5px !important;}
+.pt10 {padding-top: 10px !important;}
+.pt15 {padding-top: 15px !important;}
+.pt20 {padding-top: 20px !important;}
+.pt25 {padding-top: 25px !important;}
+
+.pr0 {padding-right: 0 !important;}
+.pr5 {padding-right: 5px !important;}
+.pr10 {padding-right: 10px !important;}
+.pr15 {padding-right: 15px !important;}
+.pr20 {padding-right: 20px !important;}
+.pr25 {padding-right: 25px !important;}
+
+.pb0 {padding-bottom: 0 !important;}
+.pb5 {padding-bottom: 5px !important;}
+.pb10 {padding-bottom: 10px !important;}
+.pb15 {padding-bottom: 15px !important;}
+.pb20 {padding-bottom: 20px !important;}
+.pb25 {padding-bottom: 25px !important;}
+
+.pl0 {padding-left: 0 !important;}
+.pl5 {padding-left: 5px !important;}
+.pl10 {padding-left: 10px !important;}
+.pl15 {padding-left: 15px !important;}
+.pl20 {padding-left: 20px !important;}
+.pl25 {padding-left: 25px !important;}
+
+/* ------------------ Percent widths --------------------*/
+.per5 {width: 5% !important;}
+.per10 {width: 10% !important;}
+.per15 {width: 15% !important;}
+.per20 {width: 20% !important;}
+.per25 {width: 25% !important;}
+.per30 {width: 30% !important;}
+.per35 {width: 35% !important;}
+.per40 {width: 40% !important;}
+.per45 {width: 45% !important;}
+.per50 {width: 50% !important;}
+.per55 {width: 55% !important;}
+.per60 {width: 60% !important;}
+.per65 {width: 65% !important;}
+.per70 {width: 70% !important;}
+.per75 {width: 75% !important;}
+.per80 {width: 80% !important;}
+.per85 {width: 85% !important;}
+.per90 {width: 90% !important;}
+.per95 {width: 95% !important;}
+.per100 {width: 100% !important;}
+
+
+/* ------------------ Borders --------------------*/
+.b {border: 1px solid @border-color;}
+.bt {border-top: 1px solid @border-color;}
+.br {border-right: 1px solid @border-color;}
+.bb {border-bottom: 1px solid @border-color;}
+.bl {border-left: 1px solid @border-color;}
+
+.btlr {border-top-left-radius: @border-radius-base;}
+.btrr {border-top-right-radius: @border-radius-base;}
+.bblr {border-bottom-left-radius: @border-radius-base;}
+.bbrr {border-bottom-right-radius: @border-radius-base;}
+.brall {border-radius: @border-radius-base;}
+
+.bn {border: none !important;}
+.bnt {border-top: none !important;}
+.bnb {border-bottom: none !important;}
+.bnl {border-left: none !important;}
+.bnr {border-right: none !important;}
+
+/* ------------------ Colors --------------------*/
+.color-red      {color: @red !important;}
+.color-blue     {color: @blue !important;}
+.color-green    {color: @green !important;}
+.color-yellow   {color: @yellow !important;}
+.color-orange   {color: @orange !important;}
+.color-white    {color: @white !important;}
+.color-teal     {color: @teal !important;}
+.color-dark     {color: @dark !important;}
+.color-pink     {color: @pink !important;}
+.color-lime     {color: @lime !important;}
+.color-magenta  {color: @magenta !important;}
+.color-purple   {color: @purple !important;}
+.color-brown    {color: @brown !important;}
+.color-gray     {color: @gray !important;}
+.color-grayspr  {color: @gray-lighter !important;}
+
+/* ------------------ Backgrounds --------------------*/
+.white-bg {
+    color: @text-color;
+    background-color: @white;
+}
+.red-bg {
+    color: @white;
+    background-color: @red;
+}
+.blue-bg {
+    color: @white;
+    background-color: @blue;
+}
+.green-bg {
+    color: @white;
+    background-color: @green;
+}
+.yellow-bg {
+    color: @white;
+    background-color: @yellow;
+}
+.orange-bg {
+    color: @white;
+    background-color: @orange;
+}
+.purple-bg {
+    color: @white;
+    background-color: @purple;
+}
+.pink-bg {
+    color: @white;
+    background-color: @pink;
+}
+.lime-bg {
+    color: @white;
+    background-color: @lime;
+}
+.magenta-bg {
+    color: @white;
+    background-color: @magenta;
+}
+.teal-bg {
+    color: @white;
+    background-color: @teal;
+}
+.brown-bg {
+    color: @white;
+    background-color: @brown;
+}
+.gray-bg {
+    color: @text-color;
+    background-color: darken(@gray-lighter, 5%);
+}
+.dark-bg {
+    color: @white;
+    background-color: @dark;
+}
+
+/* ------------------ Opacity --------------------*/
+.opacity { opacity: 1 !important;}
+.opacity0 {opacity: 0 !important;}
+
+/* ------------------ Typo --------------------*/
+.strong { font-weight: bold; }
+.uppercase {text-transform: uppercase;}
+.normal {font-weight: normal;}
+
+/* ------------------ Contextual colors --------------------*/
+.text-muted { color: @text-muted; }
+.text-primary {.text-emphasis-variant(@brand-primary); }
+.text-success {.text-emphasis-variant(@brand-success);}
+.text-info {.text-emphasis-variant(@brand-info);}
+.text-warning {.text-emphasis-variant(@brand-warning);}
+.text-danger {.text-emphasis-variant(@brand-danger);}
+.text-yellow {.text-emphasis-variant(@yellow);}
+.text-orange {.text-emphasis-variant(@orange);}
+.text-dark {.text-emphasis-variant(@dark);}
+.text-brown {.text-emphasis-variant(@brown);}
+.text-pink {.text-emphasis-variant(@pink);}
+.text-magenta {.text-emphasis-variant(@magenta);}
+.text-lime {.text-emphasis-variant(@lime);}
+
+/* ------------------ Positions --------------------*/
+.relative {position: relative;}
+.absolute {position: absolute;}
+
+/* ------------------ Rotate --------------------*/
+.rotate0 { .rotate(0deg); }
+.rotate15 { .rotate(15deg); }
+.rotate30 { .rotate(30deg); }
+.rotate45 { .rotate(45deg); }
+.rotate60 { .rotate(60deg); }
+.rotate75 { .rotate(75deg); }
+.rotate90 { .rotate(90deg); }
+.rotate105 { .rotate(105deg); }
+.rotate120 { .rotate(120deg); }
+.rotate135 { .rotate(135deg); }
+.rotate150 { .rotate(150deg); }
+.rotate165 { .rotate(165deg); }
+.rotate180 { .rotate(180deg); }
+
+.rotateM15 { .rotate(-15deg); }
+.rotateM30 { .rotate(-30deg); }
+.rotateM45 { .rotate(-45deg); }
+.rotateM60 { .rotate(-60deg); }
+.rotateM75 { .rotate(-75deg); }
+.rotateM90 { .rotate(-90deg); }
+.rotateM105 { .rotate(-105deg); }
+.rotateM120 { .rotate(-120deg); }
+.rotateM135 { .rotate(-135deg); }
+.rotateM150 { .rotate(-150deg); }
+.rotateM165 { .rotate(-165deg); }
+.rotateM180 { .rotate(-180deg); }

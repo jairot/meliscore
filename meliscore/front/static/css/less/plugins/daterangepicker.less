@@ -1,0 +1,236 @@
+/* -----------------------------------------
+   Daterange picker
+----------------------------------------- */
+ .daterangepicker {
+
+ 	position: absolute;
+	background: @white;
+	top: 100px;
+	left: 20px;
+	padding: 4px;
+	margin-top: 1px;
+	border-radius: @border-radius-base;
+
+ 	&.dropdown-menu {
+ 		max-width: none;
+  		z-index: 3000;
+  		margin-top: 2px;
+  		float: left
+ 	}
+
+ 	&.opensleft {
+ 		.ranges,
+ 		.calendar {
+ 			float: left;
+  			margin: 4px;
+ 		}
+ 	}
+
+ 	&.opensright {
+ 		.ranges,
+ 		.calendar {
+ 			float: right;
+  			margin: 4px;
+ 		}
+ 	}
+
+ 	.ranges {
+ 		width: 160px;
+  		text-align: left;
+
+  		.cancelBtn {float: right;}
+
+  		.range_inputs>div {
+  			float: left;
+  		}
+
+  		.range_inputs {
+  			.daterangepicker_end_input {
+  				.label {padding-left: 15px;}
+  				.input-mini {float: right;}
+  			}
+  		}
+
+  		.range_inputs>div:nth-child(2) {
+  			padding-left: 11px;
+  		}
+
+  		label {
+			color: #333;
+			display: block;
+			font-size: 11px;
+			font-weight: normal;
+			height: 20px;
+			line-height: 20px;
+			margin-bottom: 2px;
+			text-shadow: #fff 1px 1px 0px;
+			text-transform: uppercase;
+			width: 74px;
+  		}
+
+  		input {
+  			font-size: 11px;
+  		}
+
+  		.input-mini {
+			background-color: #eee;
+			border: 1px solid @border-color;
+			border-radius: @border-radius-base;
+			color: #555;
+			display: block;
+			font-size: 11px;
+			height: 30px;
+			line-height: 30px;
+			vertical-align: middle;
+			margin: 0 0 10px 0;
+			padding: 0 6px;
+			width: 74px;
+  		}
+
+  		ul {
+  			list-style: none;
+  			margin: 0;
+  			padding: 0;
+  		}
+
+  		li {
+  			font-size: 13px;
+			background: #f5f5f5;
+			border: 1px solid @border-color;
+			color: #08c;
+			padding: 3px 12px;
+			margin-bottom: 8px;
+			border-radius: @border-radius-base;
+			cursor: pointer;
+
+			&.acitve,
+			&:hover {
+				background: @mainColor;
+			    border: 1px solid @mainColor;
+			    color: @white;
+			}
+  		}
+ 	}
+
+ 	.calendar {
+ 		display: none;
+  		max-width: 270px;
+
+  		th,td {
+  			font-family: @font-family-base;
+			white-space: nowrap;
+			text-align: center;
+			min-width: 32px;
+  		}
+
+  		&.left {
+  			float: left;
+  			margin: 4px;
+  		}
+  		&.right {
+  			float: right;
+  			margin: 4px;
+  		}
+ 	}
+
+ 	.calendar-date {
+ 		border: 1px solid @border-color;
+		padding: 4px;
+		border-radius: @border-radius-base;
+		background: @white;
+ 	}
+
+ 	.calendar-time {
+		text-align: center;
+		margin: 8px auto 0 auto;
+		line-height: 30px;
+ 	}
+
+	table {
+		width: 100%;
+  		margin: 0;
+
+  		thead tr:first-child {
+  			border-bottom: 1px solid @border-color;
+  		}
+
+  		thead tr:last-child {color: @mainColor; font-weight: normal;}
+	}
+
+	td,th {
+		text-align: center;
+		width: 20px;
+		height: 20px;
+		border-radius: @border-radius-base;
+		cursor: pointer;
+		white-space: nowrap;
+
+		&.off,
+		&.disabled {
+			color: darken(@gray-lighter, 10%);
+		}
+
+		&.available:hover {
+			background: #eee;
+		}
+
+		&.in-range {
+			background: lighten(@mainColor, 20%);
+		    border-radius: 0;
+
+		    &.start-date {
+		    	border-top-left-radius: @border-radius-base;
+		    	border-bottom-left-radius: @border-radius-base;
+		    }
+		    &.end-date {
+		    	border-top-right-radius: @border-radius-base;
+		    	border-bottom-right-radius: @border-radius-base;
+		    }
+		}
+
+		&.active,
+		&.active:hover {
+			background-color: @mainColor;
+		    border-color: @mainColor;
+		    color: @white;
+
+		    &.start-date {
+		    	border-top-right-radius: 0;
+		    	border-bottom-right-radius: 0;
+		    }
+
+		    &.end-date {
+		    	border-top-left-radius: 0;
+		    	border-bottom-left-radius: 0;
+		    }
+		}
+
+		&.week {
+			font-size: 80%;
+  			color: #ccc;
+		}
+	}
+
+	select.monthselect,select.yearselect {
+		font-size: 12px;
+	    padding: 1px;
+	    height: auto;
+	    margin: 0;
+	    cursor: default;
+	}
+
+	select.monthselect {
+	  	margin-right: 2%;
+	  	width: 56%;
+	}
+
+	select.yearselect {
+	  	width: 40%;
+	}
+
+	select.hourselect, select.minuteselect, select.ampmselect {
+		width: 50px;
+		margin-bottom: 0;
+	}
+
+}

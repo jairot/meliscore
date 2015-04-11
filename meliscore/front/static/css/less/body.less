@@ -1,0 +1,143 @@
+/* -----------------------------------------
+   Body styles
+----------------------------------------- */
+
+/*  IE10 and windows phone 8 fix. */
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+html {height: 100%;}
+body {
+	overflow-x: hidden;
+	min-height: 100%; 
+	background: @body-bg; 
+	color: @text-color;
+	-webkit-font-smoothing: antialiased;
+	font-weight: 300;
+	position: relative;
+	&.ovh  {overflow: hidden;}
+	&.stop-scrolling {
+		height: 100%;
+  		overflow: hidden;
+  		-webkit-filter: blur(6px);
+		-moz-filter: blur(6px);
+		-ms-filter: blur(6px);
+		-o-filter: blur(6px);
+		filter: blur(6px);
+	}
+	&.remove-scroll {
+		height: 100%;
+  		overflow: hidden;
+ 	}
+	
+	&.login-page{
+		background: @login-bg;
+		min-height: inherit; 
+		
+		#login {
+			margin: 10% auto 0 auto;
+			position: relative;
+			width: 420px;
+
+			#logo {
+				position: absolute;
+				top: -75px;
+				left: 50%;
+				margin-left: -105px; /* width of the logo devided by 2 */
+			}
+
+			.login-wrapper {
+				width: 100%;
+				height: auto;
+				background-color: @login-wrapper-bg;
+				border-radius: @border-radius-base;
+				display: inline-block;
+				.box-shadow(0px 1px 1px rgba(0,0,0,.1));
+
+				.nav-tabs.nav-justified{
+					li {
+						&:first-child a {border-top-left-radius: @border-radius-base;}
+						&:last-child a {border-top-right-radius: @border-radius-base;}
+						a {border: none; color: @link-color; background: @gray;}
+						&.active {
+							a {
+								color: @text-color;
+								background-color: @white;
+							}
+						}
+					}
+				}
+				
+				
+				#user-info {
+					position: relative;
+					height: 156px;
+					img.cover {
+						border-top-left-radius: @border-radius-base;
+						border-top-right-radius: @border-radius-base;
+					}
+					h4.headline {
+						float: left;
+						padding: 10px 30px;
+					}
+				}
+			}
+		}
+	}
+	&.error-page {
+		margin-top: 5%;
+		background-color: @error-page-bg;
+		h1.error-number {
+			text-align: center;
+			font-size:20em;
+			font-family: 'Cantarell';
+		}
+	}
+
+	&.mce-fullscreen {
+		#header {display: none;}
+	}
+
+	&.full-screen {
+		width: 100%;
+		#header {
+			left:0;
+		}
+	}
+}
+
+* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; outline: none !important; }
+
+/* ------------------ Preloader --------------------*/
+#preloader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: @gray;
+	z-index: 10000;
+
+	#preloader-icon {
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin: -15px 0 0 -15px;
+		font-size: 32px;
+		color: @mainColor;
+	}
+
+	#preloader-logo {
+		float: left;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -50px;
+		margin-left: -93px;
+	}
+}
