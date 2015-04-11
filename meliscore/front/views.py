@@ -13,15 +13,17 @@ def home(request, *args, **kwargs):
                               context_instance=RequestContext(request))
 
 
-def score(request, *args, **kwargs):
+def score(request, itemid=None, *args, **kwargs):
+
     url = "http://articulo.mercadolibre.com.ar/MLA-548587141-iphone-5s-apple-16gb-retina-tactil-3g-liberado-chip-a6-ios7-_JM"
-    try:
-        item_id = re.findall("MLA-\d+", url)[0]
-    except IndexError:
-        #TODO: retornar al home con un mensaje de error
-        pass
-    item_id  = item_id.replace("-", "")
-    score = generate_scores(item_id)
-    return JsonResponse(score)
-    #return render_to_response('score.html', locals(),
-    #                          context_instance=RequestContext(request))
+    if not itemid:
+        try:
+            itemid = re.findall("MLA-\d+", url)[0]
+        except IndexError:
+            #TODO: retornar al home con un mensaje de error
+            pass
+
+    itemid  = itemid.replace("-", "")
+    score = generate_scores(itemid)
+    return render_to_response('score_ugly.html', locals(),
+                              context_instance=RequestContext(request))
