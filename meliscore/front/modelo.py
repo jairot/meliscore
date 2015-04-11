@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import re
 
-from scipy import average
 from string import punctuation
 from queries import get_item, get_item_description, get_user
 
@@ -133,6 +132,8 @@ def get_total_score(partial_scores):
             break
     return result
 
+def average(it):
+    return sum(it)/len(it)
 
 if __name__ == '__main__':
     # URL ejemplo
