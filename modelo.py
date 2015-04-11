@@ -29,25 +29,19 @@ def generate_scores(itemid):
     res = requests.get(url)
     item_data = res.json()
 
-    n_photos = len(item_data["pictures"])
-    score = min(6, n_photos) * 1.0 / 6
-
-    if n_photos < 2:
-        tip = "Muy pocas fotos!"
-    elif n_photos < 4:
-        tip = "Bien, pero podrías agregar"
-    else:
-        tip = "De diego!"
-
+    score, tip =  get_photo_score(item_data)
     partial["photo"] = {
         "score": score,
         "tip": tip
     }
     
     # traer descripción
+    desc_data = {}
+
+    score, tip = get_description_score(desc_data)
     partial["description"] = {
-        "score": 0,
-        "tip": "Media pila che!"
+        "score": score,
+        "tip": tip
     }
 
     # traer user score
@@ -68,6 +62,22 @@ def generate_scores(itemid):
     }    
 
     return result
+
+def get_description_score(desc_data):
+    return 0, ""
+
+def get_photo_score(item_data):
+    n_photos = len(item_data["pictures"])
+    score = min(6, n_photos) * 1.0 / 6
+
+    if n_photos < 2:
+        tip = "Muy pocas fotos!"
+    elif n_photos < 4:
+        tip = "Bien, pero podrías agregar"
+    else:
+        tip = "De diego!"
+
+    return score, tip
 
 
 def get_user_score(user_data):
