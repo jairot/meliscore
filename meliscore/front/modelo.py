@@ -33,7 +33,7 @@ def generate_scores(itemid):
         "score": score,
         "tip": tip
     }
-    
+
     # traer descripción
     url_description = URL_BASE + 'items/' + itemid + '/description'
     response_description = requests.get (URL_BASE + 'items/' + itemid + '/description')
@@ -49,7 +49,7 @@ def generate_scores(itemid):
     seller_id = item_data['seller_id']
     url = URL_BASE + "users/%d" % seller_id
     user_data = requests.get(url).json()
-    
+
     score, tip = get_user_score(user_data)
     partial["user_score"] = {
         "score": score,
@@ -60,7 +60,7 @@ def generate_scores(itemid):
     result = {
         "total_score": get_total_score(partial),
         "partial_scores": partial
-    }    
+    }
 
     return result
 
