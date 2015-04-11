@@ -22,6 +22,6 @@ def score(request, *args, **kwargs):
         pass
     item_id  = item_id.replace("-", "")
     score = generate_scores(item_id)
-    return JsonResponse(score)
-    #return render_to_response('score.html', locals(),
-    #                          context_instance=RequestContext(request))
+    #return JsonResponse(score)
+    return render_to_response('score.html', locals(),
+                              context_instance=RequestContext(request))
