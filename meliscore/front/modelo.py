@@ -63,8 +63,10 @@ def generate_scores(itemid):
 
     return result
 
+
 def get_description_score(desc_data):
     return 0, ""
+
 
 def get_photo_score(item_data):
     n_photos = len(item_data["pictures"])
