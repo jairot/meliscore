@@ -23,5 +23,5 @@ def score(request, *args, **kwargs):
     item_id  = item_id.replace("-", "")
     score = generate_scores(item_id)
     #return JsonResponse(score)
-    return render_to_response('score.html', locals(),
+    return render_to_response('score_ugly.html', locals(),
                               context_instance=RequestContext(request))

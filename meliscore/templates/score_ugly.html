@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+Tu score es {{ score.total_score }}
+</br>
+{% for mykey,myvalue in score.partial_scores.items %}
+
+</br>
+En {{ mykey }} : {{ myvalue.tip }}
+{% endfor %} 
+
+{% endblock content %}
