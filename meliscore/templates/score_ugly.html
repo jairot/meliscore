@@ -4,16 +4,17 @@
 {% block content %}
 
 
-Tu score es {{ score.total_score.score }}
+El Score de tu articulo es {{ score.total_score.score }}%
 </br>
 {{ score.total_score.title }}
 </br>
 {{ score.total_score.subtitle }}
 </br>
+
 {% for mykey,myvalue in score.partial_scores.items %}
 
 </br>
-En {{ mykey }} : {{ myvalue.tip }}
+El Score de tus {{ mykey }} es {{myvalue.score}}%: {{ myvalue.tip }}
 {% endfor %} 
 
 {% endblock content %}
