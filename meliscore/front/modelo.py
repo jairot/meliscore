@@ -128,8 +128,8 @@ def get_description_score(description):
 
 
 def get_total_score(partial_scores):
-    score = average([p["score"] for p in partial_scores.values()])/10
-    result = {"score": round(score,1)}
+    score = average([p["score"] for p in partial_scores.values()])
+    result = {"score_string": round(score/10,1), "score":score}
     for step in steps:
         if score < step[0]:
             result["title"] = step[1]
