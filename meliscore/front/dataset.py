@@ -2,8 +2,26 @@ import pandas as pd
 import requests
 import json
 import collections
+from datetime import datetime
+from queries import *
+import numpy as np
 
 URL_BASE = "https://api.mercadolibre.com/"
+
+def get_selling_speeds(itemids):
+    """
+        Given a list of itemids it calculates
+        the number of items sold by hour since
+        the beginning of the sale
+    """
+    data = get_item(itemids, ["id","start_time","sold_quantity", "price"])
+    data = pd.read_json(json.dumps(data))
+    data['elapsed_time'] = datetime.now() - data.start_time
+    # data['elapsed_hours'] = data.elapsed_time / np.timedelta64(1,'h')
+    data['elapsed_days'] = data.elapsed_time / np.timedelta64(1,'D')
+    data['speed'] = data.sold_quantity / data.elapsed_days
+
+    return data[['price', 'speed']]
 
 
 def simplify_item(item, prefix, sep):
@@ -59,11 +77,21 @@ def create_dataset(item):
             df = df.append(page_df)
         offset += limit
 
-    df.to_csv('%s.csv' % category_id, encoding='utf-8')
 
-    df['elapsed_time'] = datetime.now() - data.start_time
-    df['elapsed_days'] = data.elapsed_time / np.timedelta64(1,'D')
-    df['speed'] = data.sold_quantity / data.elapsed_days
+    # TODO: remove (esperando a q Francusa haga get_items)
+    df = df[:40]
+
+    df_speeds = get_selling_speeds(list(df.id))
+
+    df['speed'] = df_speeds.speed
+
+    # df['seller_score'] = ...
+
+    # df['item_score'] = ...
+
+    # df['n_images'] = ...
+
+    df.to_csv('%s.csv' % category_id, encoding='utf-8')
 
     return df
 
