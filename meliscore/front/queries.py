@@ -77,12 +77,12 @@ def get_item_description(itemid):
 
     return item_data
 
-def get_seller_score(seller_id):
-    url = URL_BASE + "users/" + seller_id
-    res = requests.get(url)
-    data = res.json()
-    score = data["seller_reputation"]["power_seller_status"]
-    return score
+#def get_seller_score(seller_id):
+    #url = URL_BASE + "users/" + seller_id
+    #res = requests.get(url)
+    #data = res.json()
+    #score = data["seller_reputation"]["power_seller_status"]
+    #return score
 
 def get_imgcount(itemid):
     """
