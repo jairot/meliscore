@@ -24,6 +24,17 @@ def simplify_item(item, prefix, sep):
 
     return dict(items)
 
+def price_quantiles(df):
+    if('price' in df.columns):
+        prices = df['price']
+        first, second, third = prices.quantile([.25, .5, .75])
+        q = {'first quantile':first,
+        'second quantile': second,
+        'third quantile':third}
+        return q
+    else:
+        raise NameError('price column does not exist')
+    
 
 def create_dataset(category_id):
     response = requests.get(URL_BASE + 'sites/MLA/search?category=' + category_id)
@@ -43,7 +54,7 @@ def create_dataset(category_id):
         else:
             df = df.append(page_df)
         offset += limit
-    print (df.columns)
+    print price_quantiles(df)
     df.to_csv('iphone5_16gb.csv', encoding='utf-8')
     
 
@@ -51,3 +62,4 @@ if __name__ == '__main__':
     # iPhone 5 16gb
     category_id = 'MLA121408'
     create_dataset(category_id)
+    
