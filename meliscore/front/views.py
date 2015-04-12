@@ -5,8 +5,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import JsonResponse
 
-
 from modelo import generate_scores
+
 
 def home(request, *args, **kwargs):
     return render_to_response('index.html', locals(),
