@@ -20,6 +20,14 @@ def get_selling_speeds(itemids):
 
     return data[['price', 'speed']]
 
+def price_quartiles(df):
+    if('price' in df.columns):
+        prices = df['price']
+        first, second, third = prices.quantile([.25, .5, .75])
+        return first, second, third
+    else:
+        raise NameError('price column does not exist')
+    
 def get_quartile_speeds(quartiles, selling_speeds):
     pass
 
@@ -35,7 +43,7 @@ if __name__ == '__main__':
     big = df[df.available_quantity > 5]
     selling_speeds = get_selling_speeds(list(big.id))
 
-    quartiles = rellenar()
+    quartiles = ()
     
     quartile_speeds = get_quartile_speeds(quartiles, selling_speeds)
 
