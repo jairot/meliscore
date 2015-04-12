@@ -92,8 +92,7 @@ def get_imgcount(itemid):
     :return: the number of images in the description.
     """
     description = get_item_description(itemid)
-    if (description['text'] != null):
-        return len(re.findall(r'img src', description['text']))
+    return len(re.findall(r'img src', description['text']))
     
 #def get_item_score(itemid):
     #url = URL_BASE + "items/" + itemid
