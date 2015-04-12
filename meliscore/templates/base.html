@@ -47,7 +47,7 @@
         <div class="header row">
         {% block header %}
         <div class="col-xs-9 col-md-10">
-            <img src="{% static 'img/meliscore_logo.png' %}" alt="MELIScore" class="meliscore_logo">
+            <a href="/"><img src="{% static 'img/meliscore_logo.png' %}" alt="MELIScore" class="meliscore_logo"></a>
             <h1>{% block title %}MELIScore{% endblock title %}</h1>
         </div>
         <div class="col-xs-3 col-md-2">
@@ -60,6 +60,14 @@
 
         <div class="row">
             <div class="col-xs-12">
+
+            {% if error_msg %}
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="im-cancel alert-icon s24"></i>
+                <strong>Epa!</strong> {{ error_msg }}
+            </div>
+            {% endif %}
 
             <div class="main-content row">
             {% block content %}
@@ -91,16 +99,9 @@
         <script src="{% static 'js/jRespond.min.js' %}"></script>
         <!-- Custom scroll for sidebars,tables and etc. -->
         <!-- Highlight code blocks -->
-        <script src="{% static 'plugins/misc/highlight/highlight.pack.js' %}"></script>
-        <script src="{% static 'plugins/core/slimscroll/jquery.slimscroll.min.js' %}"></script>
-        <script src="{% static 'plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js' %}"></script>
+        <script src="{% static 'plugins/forms/icheck/jquery.icheck.js' %}"></script>
         <script src="{% static 'plugins/forms/maxlength/bootstrap-maxlength.js' %}"></script>
-        <script src="{% static 'plugins/forms/tags/jquery.tagsinput.min.js' %}"></script>
         <script src="{% static 'plugins/forms/bootstrap-filestyle/bootstrap-filestyle.js' %}"></script>
-        <script src="{% static 'plugins/forms/maskedinput/jquery.maskedinput.js' %}"></script>
-        <script src="{% static 'plugins/forms/autosize/jquery.autosize.js' %}"></script>
-        <script src="{% static 'plugins/forms/select2/select2.js' %}"></script>
-        <script src="{% static 'plugins/forms/color-picker/spectrum.js' %}"></script>
         <script src="{% static 'js/jquery.appStart.js' %}"></script>
         <script src="{% static 'js/app.js' %}"></script>
         {% endblock scripts %}
