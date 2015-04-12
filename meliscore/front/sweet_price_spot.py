@@ -51,15 +51,13 @@ if __name__ == '__main__':
     # usados.price.describe()
     big = df[df.available_quantity > 5]
     selling_speeds = get_selling_speeds(list(big.id))
-
     print selling_speeds.columns
 
     quartiles = price_quartiles(df)
 
     quartile_speeds = get_quartile_speeds(quartiles, selling_speeds)
     
-    print quartiles
-    print quartile_speeds
+
 
 
 # Ejemplos:
