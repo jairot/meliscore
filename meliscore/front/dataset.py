@@ -56,7 +56,7 @@ def create_dataset(category_id):
             df = df.append(page_df)
         offset += limit
 
-    df.to_csv('%d.csv' % category_id, encoding='utf-8')
+    df.to_csv('%s.csv' % category_id, encoding='utf-8')
 
     return df
 
