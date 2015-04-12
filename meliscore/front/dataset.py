@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 import json
-
+import os
 
 URL_BASE = "https://api.mercadolibre.com/"
 
@@ -43,7 +43,10 @@ def create_dataset(category_id):
             df = df.append(page_df)
         offset += limit
 
-    df.to_csv('iphone5_16gb.csv', encoding='utf-8')
+    df.to_csv('%d.csv' % category_id, encoding='utf-8')
+
+    return df
+
     
 
 if __name__ == '__main__':
