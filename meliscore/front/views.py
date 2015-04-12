@@ -5,6 +5,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import JsonResponse
 
+
+from sweet_price_spot import get_sweet_spots
 from modelo import generate_scores
 
 
@@ -14,7 +16,6 @@ def home(request, *args, **kwargs):
 
 
 def score(request, itemid=None, *args, **kwargs):
-    #url = "http://articulo.mercadolibre.com.ar/MLA-548587141-iphone-5s-apple-16gb-retina-tactil-3g-liberado-chip-a6-ios7-_JM"
     if not itemid:
         url = request.POST["url"]
         try:
@@ -27,3 +28,10 @@ def score(request, itemid=None, *args, **kwargs):
     score, title, photo = generate_scores(itemid)
     return render_to_response('score.html', locals(),
                               context_instance=RequestContext(request))
+
+def sweetspot(request, itemid=None, *args, **kwargs):
+    itemid = "MLA552342571"
+    results = get_sweet_spots(itemid)
+    data = {"data": results}
+    return JsonResponse(data)
+
