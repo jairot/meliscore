@@ -90,10 +90,18 @@ def predict_salespeed(itemid):
     regr = linear_model.LinearRegression()
     # Train the model using the training sets
     regr.fit(X_train, y_train)
+    
+    # The mean square error
+    print "\nModel evaluation"
+    print "Residual sum of squares: %.2f" % np.mean((regr.predict(X_test) - y_test) ** 2)
+    # Explained variance score: 1 is perfect prediction
+    
+    print 'Variance score: %.2f' % regr.score(X_test, y_test)
+
 
     sale_speed = regr.predict(x)
-    print "Predicted sale speed %.1f items per day" % sale_speed
-    
+    print "\nPredicted sale speed %.1f items per day" % sale_speed
+
     return sale_speed
 
 if __name__ == '__main__':
