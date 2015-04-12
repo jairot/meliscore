@@ -37,7 +37,7 @@ def sweetspot(request, itemid=None, *args, **kwargs):
 
 
 def salespeed(request, itemid=None, *args, **kwargs):
-    results = predict_sale_speed(itemid)
+    results = predict_salespeed(itemid)
     data = {"data": results}
     return JsonResponse(data)
 
