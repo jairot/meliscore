@@ -1,4 +1,4 @@
-# Meliscore
+# ![](/meliscore/front/static/img/meliscore_logo.png) Meliscore
 
 Mercado Libre publications Scoring app
 
