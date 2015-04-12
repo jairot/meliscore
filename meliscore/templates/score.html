@@ -3,68 +3,81 @@
 {% load static %}
 
 {% block meta_title %}Scoring para <a href="{{ url }}">{{ title }}</a>{% endblock meta_title %}
-{% block title %}Scoring para <a href="{{ url }}">{{ itemid }}</a>{% endblock title %}
+{% block title %}Scoring para <a href="{{ url }}">{{ title }}</a>{% endblock title %}
 
 {% block content %}
-    <div class="row">
     <div class="col-lg-12 col-md-12">
 
-    <div class="row">
-        <div class="col-xs-3">
-            <div id="meliscore_scorechart" class="pie-charts
-                {% if score.total_score.score > 95 %}success
-                {% elif score.total_score.score > 80 %}lime
-                {% elif score.total_score.score > 55 %}yellow
-                {% elif score.total_score.score > 30 %}warning
-                {% else %}danger{% endif %}-pie">
+        <div class="row">
+            <div class="col-xs-3">
+                <div id="meliscore_chart" class="pie-charts
+                    {% if score.total_score.score > 95 %}success
+                    {% elif score.total_score.score > 80 %}lime
+                    {% elif score.total_score.score > 55 %}yellow
+                    {% elif score.total_score.score > 30 %}warning
+                    {% else %}danger{% endif %}-pie">
 
-                <div class="easy-pie-chart-teal" data-percent="{{ score.total_score.score|default:"58" }}">
-                {{ score.total_score.score|default:"58" }}
-                <small>%</small>
-                </div>
-            </div>
-        </div>
-
-        <div class="partial_progress_group col-xs-9">
-            {% for partial_title, partial_value in score.partial_scores.items %}
-            <div class="partial_progress">
-                <h5>{{ partial_title|title }}</h5>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped
-                    progress-bar-{% if partial_value.score > 95 %}success
-                    {% elif partial_value.score > 80 %}lime
-                    {% elif partial_value.score > 55 %}yellow
-                    {% elif partial_value.score > 30 %}warning
-                    {% else %}danger{% endif %}
-                    " role="progressbar" aria-valuenow="{{ partial_value.score }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ partial_value.score }}%;">
-                    <h5 class="partial_percent">{{ partial_value.score }}%</h5>
+                    <div class="easy-pie-chart" data-percent="{{ score.total_score.score|default:"58" }}">
+                    {{ score.total_score.score|default:"58" }}
+                    <small>%</small>
                     </div>
                 </div>
-                {% comment %}
-                <br>
-                {{ partial_value.tip }}
-                <br>
-                {% endcomment %}
+            </div><!-- .col-xs-3 -->
+
+            <div class="partial_progress_group col-xs-9">
+                {% for partial_title, partial_value in score.partial_scores.items %}
+                <div class="partial_progress">
+                    <h5>{{ partial_title|title }}</h5>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped
+                        progress-bar-{% if partial_value.score > 95 %}success
+                        {% elif partial_value.score > 80 %}lime
+                        {% elif partial_value.score > 55 %}yellow
+                        {% elif partial_value.score > 30 %}warning
+                        {% else %}danger{% endif %}
+                        " role="progressbar" aria-valuenow="{{ partial_value.score }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ partial_value.score }}%;">
+                        <h5 class="partial_percent">{{ partial_value.score }}%</h5>
+                        </div>
+                    </div>
+                    {% comment %}
+                    <br>
+                    {{ partial_value.tip }}
+                    <br>
+                    {% endcomment %}
+                </div><!-- .partial_progress -->
+                {% endfor %}
+            </div><!-- .partial_progress-group -->
+        </div><!-- .row-->
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="text-{% spaceless %}
+                {% if score.total_score.score > 95 %}success
+                    {% elif score.total_score.score > 80 %}lime
+                    {% elif score.total_score.score > 55 %}yellow
+                    {% elif score.total_score.score > 30 %}warning
+                    {% else %}danger{% endif %}
+                {% endspaceless %}">{{ score.total_score.title }}</h2>
+                <h3>{{ score.total_score.subtitle }}</h3>
             </div>
-            {% endfor %}
-        </div>
-    </div>
+        </div><!-- .row-->
 
-    <h2>{{ score.total_score.title }}</h2>
-    <h3>{{ score.total_score.subtitle }}</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                {% include "recommendations.html" %}
+            </div>
+        </div><!-- .row-->
 
-    </br>
-
-    {% include "recommendations.html" %}
-
+    </div><!-- .col-xs-12 -->
 {% endblock content %}
 
 {% block extra_scripts %}
     {{ block.super }}
     <script src="{% static 'plugins/forms/icheck/jquery.icheck.js' %}"></script>
     <script src="{% static 'plugins/charts/pie-chart/jquery.easy-pie-chart.js' %}"></script>
+
     <script>
-        $(".easy-pie-chart-teal").easyPieChart({
+        $(".easy-pie-chart").easyPieChart({
             barColor: "{% spaceless %}
             {% if score.total_score.score > 95 %}#00c574
                 {% elif score.total_score.score > 80 %}#a8db43
@@ -75,10 +88,10 @@
             {% endspaceless %}",
             borderColor: "#000",
             lineCap: 'butt',
-            lineWidth: 40,
+            lineWidth: 20,
             scaleColor: false,
             trackColor: "#eee",
-            size: 160,
+            size: 120,
             animate: 2500
         });
     </script>

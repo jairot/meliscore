@@ -55,13 +55,6 @@ $(document).ready(function() {
             graylight: '#EEEEEE',
             graylighter: '#F2F1EF'
         },
-        customScroll: {
-            color: '#fff', //color of custom scroll
-            rscolor: '#95A5A6', //color of right sidebar
-            size: '5px', //size in pixels
-            opacity: '1', //opacity
-            alwaysVisible: false //disable hide in
-        },
         header: {
             fixed: true //fixed header
         },
@@ -84,7 +77,6 @@ $(document).ready(function() {
         tooltips: true, //activate tooltip plugin build in bootstrap
         tables: {
             responsive: true, //make tables resposnive
-            customscroll: true //ativate custom scroll for responsive tables
         },
         alerts: {
             animation: true, //animation effect toggle
