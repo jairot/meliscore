@@ -30,7 +30,6 @@ def score(request, itemid=None, *args, **kwargs):
                               context_instance=RequestContext(request))
 
 def sweetspot(request, itemid=None, *args, **kwargs):
-    itemid = "MLA552342571"
     results = get_sweet_spots(itemid)
     data = {"data": results}
     return JsonResponse(data)
