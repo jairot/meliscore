@@ -38,7 +38,6 @@ def generate_scores(itemid):
         pass
     else:
         partial["fotos"] = {"score": int(score*100), "tip": tip}
-
     # description score
     try:
         description = get_item_description(itemid)
@@ -101,8 +100,8 @@ def get_description_score(description):
     MAX_DESC_LEN = 1000
 
     text = description["plain_text"]
-    if (not text):
-        strcount= 0
+    if not text:
+        strcount = 0
     else:
         text = text.encode("utf-8")
         r = re.compile(r'[{}]'.format(punctuation))
