@@ -36,10 +36,10 @@ def get_sweet_spots(itemid):
     quartile_speeds = get_quartile_speeds(quartiles, selling_speeds)
 
     quartiles = [str(int(quartil)) for quartil in quartiles]
-    result = [["< " + quartiles[0], quartile_speeds[0]],
-              [quartiles[0] + " - " + quartiles[1], quartile_speeds[1]],
-              [quartiles[1] + " - " + quartiles[2], quartile_speeds[2]],
-              ["> " + quartiles[2], quartile_speeds[3]]]
+    result = [["< $" + quartiles[0], quartile_speeds[0]],
+              ["$" + quartiles[0] + " - $" +quartiles[1], quartile_speeds[1]],
+              [quartiles[1] + " - $" + quartiles[2], quartile_speeds[2]],
+              ["> $" + quartiles[2], quartile_speeds[3]]]
 
     return result
 
