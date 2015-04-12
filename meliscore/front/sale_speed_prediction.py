@@ -55,7 +55,7 @@ def extract_features(df, itemid):
     # def map_score(score):
     #     pass
 
-    # fdf['item_score'] = df.item_score.apply(map_score) 
+    # fdf['item_score'] = df.item_score.apply(map_score)
 
     # fdf['n_images'] = df.n_images / df.n_images.max()
 
@@ -83,7 +83,7 @@ def predict_salespeed(itemid):
     # svr_lin = SVR(kernel='linear', C=1e3)
     # svr_poly = SVR(kernel='poly', C=1e3, degree=2)
     # regr = linear_model.LinearRegression()
-    
+
     regr = svr_rbf
 
 
@@ -94,28 +94,28 @@ def predict_salespeed(itemid):
 
     print "Extracting numeric features"
     X, y, x = extract_features(df, itemid)
-    
+
     print "Splitting in train and test sets"
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    
+
     print "Training regression model"
     # Create linear regression object
 
     # Train the model using the training sets
     regr.fit(X_train, y_train)
-    
+
     # The mean square error
     print "\nModel evaluation"
     print "Residual sum of squares: %.2f" % np.mean((regr.predict(X_test) - y_test) ** 2)
     # Explained variance score: 1 is perfect prediction
-    
+
     print 'Variance score: %.2f' % regr.score(X_test, y_test)
 
     sale_speed = regr.predict(x)
 
     print "\nPredicted sale speed %.1f items per day" % sale_speed
 
-    return {"predicted_sale_speed": sale_speed}
+    return {"predicted_sale_speed": sale_speed[0]}
 
 
 if __name__ == '__main__':
