@@ -5,7 +5,6 @@ import collections
 from datetime import datetime
 from queries import *
 import numpy as np
-from pandas import Series
 from pandas import DataFrame
 
 URL_BASE = "https://api.mercadolibre.com/"
@@ -16,11 +15,12 @@ def get_selling_speeds(itemids):
         the number of items sold by hour since
         the beginning of the sale
     """
-    data = get_item(itemids, ["id","start_time","sold_quantity", "price"])
+    data = get_items(itemids, ["id","start_time","sold_quantity", "price"])
     data = pd.read_json(json.dumps(data))
     data['elapsed_time'] = datetime.now() - data.start_time
     # data['elapsed_hours'] = data.elapsed_time / np.timedelta64(1,'h')
     data['elapsed_days'] = data.elapsed_time / np.timedelta64(1,'D')
+
     data['speed'] = data.sold_quantity / data.elapsed_days
 
     return data[['price', 'speed']]
@@ -61,7 +61,7 @@ def find_seller_score(users):
     for user in users:
         seller_score = user["seller_reputation"]["power_seller_status"]
         scores = scores + [seller_score]
-    return Series(scores)
+    return pd.Series(scores)
 
 def find_imgcount(items):
     imgcount = []
@@ -69,16 +69,17 @@ def find_imgcount(items):
         item_id = item['id']
         n_imgs = get_imgcount(item_id)
         imgcount = imgcount + [n_imgs]
-    return Series(imgcount)
+
+    return pd.Series(imgcount)
 
 def find_item_score(items):
     scores = []
     for item in items:
         item_score = item["listing_type_id"]
         scores = scores + [item_score]
-    return Series(scores)
-
-def create_dataset(item):
+    return pd.Series(scores)
+    
+def create_dataset(item, reduced=False, extra_features=False):
     category_id = item.get('category_id')
     condition = item.get('condition')
 
@@ -100,21 +101,20 @@ def create_dataset(item):
             df = df.append(page_df)
         offset += limit
 
-    # TODO: remove (esperando a q Francusa haga get_items)
-    df = df[:40]
+    if reduced:
+        # reduce dataFrame to items with stock
+        # (from which we can calculate a selling price)
+        df = df[(df.available_quantity > 5) | (df.id == item['id'])]
 
     df_speeds = get_selling_speeds(list(df.id))
-
     df['speed'] = df_speeds.speed
 
-    items= get_items(list(df['id']), ['id',"listing_type_id"])
-    users = get_users(list(df['id']), ['seller_reputation',])
-    
-    df['seller_score'] = find_seller_score(users)
-
-    df['item_score'] =  find_item_score(items)
-
-    df['n_images'] = find_imgcount(items)
+    if extra_features:
+        items = get_items(list(df['id']), ['id',"listing_type_id"])
+        users = get_users(list(df['id']), ['seller_reputation'])
+        df['seller_score'] = find_seller_score(users)
+        df['item_score'] = find_item_score(items)
+        df['n_images'] = find_imgcount(items)
 
     df.to_csv('%s.csv' % category_id, encoding='utf-8')
 

@@ -7,9 +7,7 @@ from dataset import create_dataset
 import pandas as pd
 from queries import get_item
 
-
-def create_featurized_dataset(itemid):
-    df = create_dataset(itemid)
+from sklearn.svm import SVR
 
 
 def extract_features(df, itemid):
@@ -36,6 +34,8 @@ def extract_features(df, itemid):
 
         y (learned variable): selling_speed
     """
+    df = df[(~df.speed.isnull()) | (df.id == itemid)]
+
     fdf = pd.DataFrame()
     fdf['id'] = df.id
 
@@ -49,35 +49,40 @@ def extract_features(df, itemid):
         return 0.5
     fdf['title_digits_ratio'] = df.title.apply(get_digit_rate)
 
-    # fdf['seller_score'] = ...
+    # fdf['seller_score'] = df.seller_score / df.seller_score.max()
 
-    # fdf['item_score'] = ...
+    # mapear gold, silver, etc... a números
+    # def map_score(score):
+    #     pass
 
-    # fdf['n_images'] = ...
+    # fdf['item_score'] = df.item_score.apply(map_score) 
+
+    # fdf['n_images'] = df.n_images / df.n_images.max()
 
     fdf['list_ranking'] = df.index * 1.0 / len(df)
-    
-    features_item = fdf[df.id == itemid]
+
+    features_item = fdf[fdf.id == itemid]
+    fdf = fdf[fdf.id != itemid]
 
     del features_item['id']
     del fdf['id']
 
     X = fdf.values
-    y = df.speed.values
-    x = features_item.values
+    y = df[df.id != itemid].speed.values
+    x = features_item.values[0]
 
     return X, y, x
 
 
-def predict_salespeed(itemid):
+def predict_salespeed(itemid, regr):
+    """
+        itemid: item for which we want to predict sale speed
+        regr: regression mode to be trained
+    """
     item = get_item(itemid)
 
     print "Creating dataset of similar items (same category and condition)"
-    df = create_dataset(item)
-
-    # reduce dataFrame to items with stock
-    # (from which we can calculate a selling price)
-    df[(df.available_quantity > 5) | (df.id == itemid)]
+    df = create_dataset(item, reduced=True)
 
     print "Extracting numeric features"
     X, y, x = extract_features(df, itemid)
@@ -87,14 +92,26 @@ def predict_salespeed(itemid):
  
     print "Training regression model"
     # Create linear regression object
-    regr = linear_model.LinearRegression()
+
     # Train the model using the training sets
     regr.fit(X_train, y_train)
+    
+    # The mean square error
+    print "\nModel evaluation"
+    print "Residual sum of squares: %.2f" % np.mean((regr.predict(X_test) - y_test) ** 2)
+    # Explained variance score: 1 is perfect prediction
+    
+    print 'Variance score: %.2f' % regr.score(X_test, y_test)
 
     sale_speed = regr.predict(x)
-    print "Predicted sale speed %.1f items per day" % sale_speed
-    
-    return sale_speed
+
+    # import ipdb; ipdb.set_trace()
+    print "\nPredicted sale speed %.1f items per day" % sale_speed
+
+    return {"predicted_sale_speed": sale_speed}
+
+# def eval_lin_regr():
+#     pass
 
 if __name__ == '__main__':
     # Ejemplos:
@@ -102,4 +119,12 @@ if __name__ == '__main__':
     # condition = "new"
     itemid = "MLA550874381"
     
-    sale_speed = predict_salespeed(itemid)
+
+    ###############################################################################
+    # Fit regression model
+    svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
+    # svr_lin = SVR(kernel='linear', C=1e3)
+    # svr_poly = SVR(kernel='poly', C=1e3, degree=2)
+    regr = linear_model.LinearRegression()
+    # regr = svr_rbf
+    sale_speed = predict_salespeed(itemid, regr)
