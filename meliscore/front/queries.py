@@ -77,6 +77,22 @@ def get_item_description(itemid):
 
     return item_data
 
+def get_seller_score(seller_id):
+    url = URL_BASE + "users/" + seller_id
+    res = requests.get(url)
+    data = res.json()
+    score = data["seller_reputation"]["power_seller_status"]
+    return score
+
+def get_imgcount(itemid):
+    """
+    Makes a request to items/<itemid>/description and retrieves
+    the number of images it has.
+    :param itemid: the id of the item.
+    :return: the number of images in the description.
+    """
+    description = get_item_description(itemid)
+    return len(re.findall(r'img src', description['text']))
 
 def get_user(userid):
     """
