@@ -68,12 +68,17 @@
             </div>
         </div><!-- .row-->
 
+        <div class="row">
+            <div class="col-xs-12">
+                {% include "sweetprice.html" %}
+            </div>
+        </div><!-- .row-->
+
     </div><!-- .col-xs-12 -->
 {% endblock content %}
 
 {% block extra_scripts %}
     {{ block.super }}
-    <script src="{% static 'plugins/forms/icheck/jquery.icheck.js' %}"></script>
     <script src="{% static 'plugins/charts/pie-chart/jquery.easy-pie-chart.js' %}"></script>
 
     <script>

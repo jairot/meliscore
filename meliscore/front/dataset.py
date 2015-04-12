@@ -5,6 +5,7 @@ import collections
 from datetime import datetime
 from queries import *
 import numpy as np
+from pandas import DataFrame
 
 URL_BASE = "https://api.mercadolibre.com/"
 
@@ -38,7 +39,7 @@ def simplify_item(item, prefix, sep):
             items.extend(simplify_item(v, new_key, sep=sep).items())
         else:
             items.append((new_key, v))
-        
+
     return dict(items)
 
 
@@ -54,11 +55,10 @@ def price_quantiles(df):
     else:
         raise NameError('price column does not exist')
 
-def find_seller_score(df):
+def find_seller_score(users):
     scores = []
-    for index,row in df.iterrows():
-        seller_id = row['seller_id']
-        seller_score = get_seller_score(seller_id)
+    for user in users:
+        seller_score = user["seller_reputation"]["power_seller_status"]
         scores = scores + [seller_score]
     return pd.Series(scores)
 
@@ -68,8 +68,9 @@ def find_imgcount(items):
         item_id = item['id']
         n_imgs = get_imgcount(item_id)
         imgcount = imgcount + [n_imgs]
+
     return pd.Series(imgcount)
-    
+
 def find_item_score(items):
     scores = []
     for item in items:
@@ -108,15 +109,14 @@ def create_dataset(item, reduced=False):
 
     df['speed'] = df_speeds.speed
 
-    df = df[(~df.speed.isnull()) | (df.id == item['id'])]
-
-    items = get_items(list(df['id']))
+    items = get_items(list(df['id']), ['id',"listing_type_id"])
+    users = get_users(list(df['id']), ['seller_reputation'])
     
-    # df['seller_score'] = find_seller_score(df)
+    df['seller_score'] = find_seller_score(users)
 
-    # df['item_score'] =  find_item_score(items)
+    df['item_score'] =  find_item_score(items)
 
-    # df['n_images'] = find_imgcount(items)
+    df['n_images'] = find_imgcount(items)
 
     df.to_csv('%s.csv' % category_id, encoding='utf-8')
 

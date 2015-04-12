@@ -1,25 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>Ingres&aacute; la URL de tu producto publicado en <a href="http://mercadolibre.com.ar">MercadoLibre</a> para verificar tu scoring.</p>
+    <div class="col-xs-12">
+        <p><strong>Ingres&aacute; la URL de tu producto publicado en <a href="http://mercadolibre.com.ar">MercadoLibre</a></strong> para verificar tu scoring.</p>
 
-    <form class="form-horizontal group-border stripped" role="form"
-          action="{% url 'score' %}" method="post">
-          {% csrf_token %}
-    <div class="form-group">
-        <div class="col-lg-12 col-md-12">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
+        <form class="form-horizontal group-border stripped" role="form"
+              action="{% url 'score' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="col-xs-12">
                     <div class="input-group">
-                        <input type="text" name="url" class="form-control" placeholder="URL de tu articulo">
+                        <input type="text" name="url" class="form-control left-icon" placeholder="URL de tu articulo">
+                        <i class="im-globe s16 left-input-icon"></i>
                         <span class="input-group-btn">
-                            <button class="btn btn-teal" type="submit">Score it!</button>
+                            <button class="btn btn-teal" type="submit">Chequear Score!</button>
                         </span>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-    </form>
-    <div>{{ error_msg }}</div>
 {% endblock content %}

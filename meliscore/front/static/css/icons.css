@@ -3,22 +3,22 @@ Icon packs
 ========================================================================== */
 @font-face {
   font-family: 'icomoon';
-  src:url('../fonts/icomoon.eot');
-  src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf') format('truetype'),
-    url('../fonts/icomoon.woff') format('woff'),
-    url('../fonts/icomoon.svg#icomoon') format('svg');
+  src:url('/static/fonts/icomoon.eot');
+  src:url('/static/fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+    url('/static/fonts/icomoon.ttf') format('truetype'),
+    url('/static/fonts/icomoon.woff') format('woff'),
+    url('/static/fonts/icomoon.svg#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'fontAwesome';
-  src: url('../fonts/fontawesome-webfont.eot?v=4.1.0');
-  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'), 
-    url('../fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'), 
-    url('../fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'), 
-    url('../fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+  src: url('/static/fonts/fontawesome-webfont.eot?v=4.1.0');
+  src: url('/static/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
+    url('/static/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
+    url('/static/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
+    url('/static/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
