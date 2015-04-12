@@ -56,25 +56,24 @@ def price_quantiles(df):
 
 def find_seller_score(df):
     scores = []
-    for index,row in df.iterrows():
+    for index,row in df.iterrow():
         seller_id = row['seller_id']
         seller_score = get_seller_score(seller_id)
         scores = scores + [seller_score]
     return Series(scores)
 
-def find_imgcount(df):
+def find_imgcount(items):
     imgcount = []
-    for index,row in df.iterrows():
-        item_id = row['id']
+    for item in items:
+        item_id = item['id']
         n_imgs = get_imgcount(item_id)
         imgcount = imgcount + [n_imgs]
     return Series(imgcount)
     
 def find_item_score(df):
     scores = []
-    for index,row in df.iterrows():
-        item_id = row['id']
-        item_score = get_item_score(item_id)
+    for item in items:
+        item_score = item["listing_type_id"]
         scores = scores + [item_score]
     return Series(scores)
     
@@ -107,8 +106,9 @@ def create_dataset(item):
 
     df['speed'] = df_speeds.speed
 
+    items= get_items(list(df['id']))
     
-    df['seller_score'] = find_seller_score(df)
+    df['seller_score'] = find_seller_score(items)
 
     df['item_score'] =  find_item_score(df)
 
