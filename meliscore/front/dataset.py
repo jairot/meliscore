@@ -37,8 +37,11 @@ def price_quantiles(df):
         raise NameError('price column does not exist')
     
 
-def create_dataset(category_id):
-    response = requests.get(URL_BASE + 'sites/MLA/search?category=' + category_id)
+def create_dataset(item):
+    category_id = item.get('category_id')
+    condition = item.get('condition')
+
+    response = requests.get(URL_BASE + 'sites/MLA/search?category={}&condition={}'.format(category_id, condition))
     data = response.json()
 
     limit = data['paging']['limit']
@@ -57,9 +60,11 @@ def create_dataset(category_id):
         offset += limit
 
     df.to_csv('%s.csv' % category_id, encoding='utf-8')
+
     df['elapsed_time'] = datetime.now() - data.start_time
     df['elapsed_days'] = data.elapsed_time / np.timedelta64(1,'D')
     df['speed'] = data.sold_quantity / data.elapsed_days
+
     return df
 
 
