@@ -182,3 +182,37 @@ body {
 .close {
     font-size: 30px;
 }
+
+/* mercadolibre colors */
+a {
+    color: #0f0e9f;
+    text-decoration: underline;
+}
+a:hover, a:focus {
+    color: #2f2ebf;
+}
+.btn-meli {
+    background: #FFE600;
+    border-color: #ceac03;
+    box-shadow: 0 2px 0 #dfbb07;
+    color: #2D3277;
+}
+.btn-meli:hover,
+.btn-meli:focus,
+.btn-meli:active,
+.btn-meli.active,
+.open > .dropdown-toggle.btn-meli {
+    background: #f2d12b;
+    border-color: #ceac03;
+}
+.btn-meli:active,
+.btn-meli.active,
+.open > .dropdown-toggle.btn-teal {
+   background-image: none;
+}
+.form-control:hover, .form-control:focus,
+.form-horizontal .form-control:focus,
+.form-inline .form-control:focus.form-control:hover,
+.form-control:focus {
+    border-color: #ceac03;
+}
