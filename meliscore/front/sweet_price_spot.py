@@ -38,7 +38,7 @@ def get_sweet_spots(itemid):
     quartiles = [str(int(quartil)) for quartil in quartiles]
     result = [["< $" + quartiles[0], round(quartile_speeds[0],2)],
               ["$" + quartiles[0] + " - $" +quartiles[1], round(quartile_speeds[1],2)],
-              [quartiles[1] + " - $" + quartiles[2], round(quartile_speeds[2],2)],
+              ["$" + quartiles[1] + " - $" + quartiles[2], round(quartile_speeds[2],2)],
               ["> $" + quartiles[2], round(quartile_speeds[3],2)]]
 
     return result
