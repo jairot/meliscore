@@ -70,7 +70,13 @@ def find_imgcount(df):
         imgcount = imgcount + [n_imgs]
     return Series(imgcount)
     
-def 
+def find_item_score(df):
+    scores = []
+    for index,row in df.iterrows():
+        item_id = row['id']
+        item_score = get_item_score(item_id)
+        scores = scores + [item_score]
+    return Series(scores)
     
 def create_dataset(item):
     category_id = item.get('category_id')
@@ -104,9 +110,9 @@ def create_dataset(item):
     
     df['seller_score'] = find_seller_score(df)
 
-    df['item_score'] = find_imgcount(df)
+    df['item_score'] =  find_item_score(df)
 
-    # df['n_images'] = ...
+    df['n_images'] = find_imgcount(df)
 
     df.to_csv('%s.csv' % category_id, encoding='utf-8')
 
