@@ -21,7 +21,7 @@ def score(request, itemid=None, *args, **kwargs):
         try:
             itemid = re.findall("MLA-\d+", url)[0]
         except IndexError:
-            return render_to_response('index.html', {'error_msg': 'Not a valid URL'},
+            return render_to_response('index.html', {'error_msg': 'La Url ingresada no pertenece a un item valido'},
                                       context_instance=RequestContext(request))
 
     itemid  = itemid.replace("-", "")
