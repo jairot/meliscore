@@ -94,7 +94,6 @@ def create_dataset(item):
             df = df.append(page_df)
         offset += limit
 
-
     # TODO: remove (esperando a q Francusa haga get_items)
     df = df[:40]
 

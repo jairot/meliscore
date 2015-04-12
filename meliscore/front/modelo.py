@@ -38,7 +38,7 @@ def generate_scores(itemid):
         pass
     else:
         partial["fotos"] = {"score": int(score*100), "tip": tip}
-    
+
     # description score
     try:
         description = get_item_description(itemid)
@@ -128,8 +128,8 @@ def get_description_score(description):
 
 
 def get_total_score(partial_scores):
-    score = average([p["score"] for p in partial_scores.values()])
-    result = {"score": int(score)}
+    score = average([p["score"] for p in partial_scores.values()])/10
+    result = {"score": round(score,1)}
     for step in steps:
         if score < step[0]:
             result["title"] = step[1]

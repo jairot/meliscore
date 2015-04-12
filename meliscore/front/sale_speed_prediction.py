@@ -12,7 +12,7 @@ def create_featurized_dataset(itemid):
     df = create_dataset(itemid)
 
 
-def extract_features(df):
+def extract_features(df, itemid):
     """
         Given a dataframe of data about items
         it creates matrices for machine learning
@@ -56,20 +56,45 @@ def extract_features(df):
     # fdf['n_images'] = ...
 
     fdf['list_ranking'] = df.index * 1.0 / len(df)
+    
+    features_item = fdf[df.id == itemid]
 
-    # IMPORTANT: return normalization constants.
-    # (We need them to fit the features of the input item)
-
+    del features_item['id']
     del fdf['id']
 
     X = fdf.values
     y = df.speed.values
+    x = features_item.values
 
-    return X, y
+    return X, y, x
 
 
+def predict_salespeed(itemid):
+    item = get_item(itemid)
 
+    print "Creating dataset of similar items (same category and condition)"
+    df = create_dataset(item)
 
+    # reduce dataFrame to items with stock
+    # (from which we can calculate a selling price)
+    df[(df.available_quantity > 5) | (df.id == itemid)]
+
+    print "Extracting numeric features"
+    X, y, x = extract_features(df, itemid)
+    
+    print "Splitting in train and test sets"
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+ 
+    print "Training regression model"
+    # Create linear regression object
+    regr = linear_model.LinearRegression()
+    # Train the model using the training sets
+    regr.fit(X_train, y_train)
+
+    sale_speed = regr.predict(x)
+    print "Predicted sale speed %.1f items per day" % sale_speed
+    
+    return sale_speed
 
 if __name__ == '__main__':
     # Ejemplos:
@@ -77,27 +102,4 @@ if __name__ == '__main__':
     # condition = "new"
     itemid = "MLA550874381"
     
-    item = get_item(itemid)
-
-    df = create_dataset(item)
-
-    # reduce dataFrame to items with stock
-    # (from which we can calculate a selling price)
-    df = df[df.available_quantity > 5]
-
-    X, y = extract_features(df)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
- 
-    # Train the model using the training sets
-    regr.fit(X_train, y_train)
-
-    # The coefficients
-    print 'Coefficients:'
-    print regr.coef_
-    
-    # The mean square error
-    rss = np.mean((regr.predict(X_test) - y_test) ** 2)
-    print "Residual sum of squares: %.2f" % rss
-
-    # Explained variance score: 1 is perfect prediction
-    print('Variance score: %.2f' % regr.score(X_test, y_test))
+    sale_speed = predict_salespeed(itemid)
