@@ -71,8 +71,7 @@ if __name__ == '__main__':
 
     quartile_speeds = get_quartile_speeds(quartiles, selling_speeds)
     
-    print quartiles
-    print quartile_speeds
+
 
 
 # Idea: dar selling speed por precio
