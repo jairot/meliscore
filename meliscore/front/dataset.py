@@ -108,7 +108,7 @@ def create_dataset(item):
     df['speed'] = df_speeds.speed
 
     items= get_items(list(df['id']), ['id',"listing_type_id"])
-    users = get_users(list(df['id']), ['seller_reputation'])
+    users = get_users(list(df['id']), ['seller_reputation',])
     
     df['seller_score'] = find_seller_score(users)
 

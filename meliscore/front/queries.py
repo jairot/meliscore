@@ -87,20 +87,9 @@ def get_imgcount(itemid):
     :return: the number of images in the description.
     """
     description = get_item_description(itemid)
-<<<<<<< HEAD
-    return len(re.findall(r'img src', description['text']))
-    
-#def get_item_score(itemid):
-    #url = URL_BASE + "items/" + itemid
-    #res = requests.get(url)
-    #data = res.json()
-    #item_score = data['listing_type_id']
-    #return item_score
-=======
     if description.get('text'):
         return len(re.findall(r'img src', description['text']))
 
->>>>>>> 47c743c997921a3f37028dd36571edb2367afdfb
 
 def get_user(userid):
     """
