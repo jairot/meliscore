@@ -49,11 +49,11 @@ def extract_features(df, itemid):
         return 0.5
     fdf['title_digits_ratio'] = df.title.apply(get_digit_rate)
 
-    # fdf['seller_score'] = ...
+    # fdf['seller_score'] = df.seller_score / df.seller_score.max()
 
     # fdf['item_score'] = ...
 
-    # fdf['n_images'] = ...
+    # fdf['n_images'] = df.n_images / df.n_images.max()
 
     fdf['list_ranking'] = df.index * 1.0 / len(df)
     
@@ -98,11 +98,10 @@ def predict_salespeed(itemid):
     
     print 'Variance score: %.2f' % regr.score(X_test, y_test)
 
-
     sale_speed = regr.predict(x)
     print "\nPredicted sale speed %.1f items per day" % sale_speed
 
-    return sale_speed
+    return {"predicted_sale_speed": sale_speed}
 
 if __name__ == '__main__':
     # Ejemplos:

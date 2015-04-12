@@ -10,33 +10,44 @@ body {
     margin: 0 auto;
     max-width: 95%;
     width: 900px;
+}
 
-    @media (max-width: 900px) {
+@media (max-width: 900px) {
+    body {
         margin: 0 1em;
     }
 }
 
-header {
-    height: 6em;
+.header {
     padding: 2em 0;
 }
-header h1 {
+.header h1 {
+    bottom: 0;
     float: left;
+    font-size: 2em;
     font-weight: 400;
     margin: 0;
+    margin-left: 2.5em;
+    position: absolute;
 }
-header .meliscore_logo {
+@media (max-width: 650px) {
+    .header h1 {
+        font-size: 1.5em;
+        margin-left: 3.2em;
+    }
+}
+.header .meliscore_logo {
     float: left;
     height: 4em;
-    margin-top: -0.75em;
-    padding-right: 1em;
 }
 
-.ml_logo_container {
-    float: right;
+.header .ml_logo_container {
+    padding: 0.5em 0;
 }
-.ml_logo_container img {
+.header .ml_logo_container img {
+    float: right;
     max-height: 2em;
+    max-width: 100%;
 }
 
 .main-content {
@@ -44,20 +55,24 @@ header .meliscore_logo {
 }
 .main-content h2 {
     font-weight: 400;
-    margin-bottom: 2em;
+    margin-bottom: 0;
+}
+.main-content h3 {
+    font-weight: 400;
+    margin-top: 0;
 }
 
 .meliscore_chart {
-    height: 140px;
-    width: 140px;
+    width: 100%;
 }
 
 .pie-charts {
     font-size: 2em;
+    padding: 0;
 }
 
 .partial_progress_group {
-    padding: 1em 0;
+    /*padding: 1em 0;*/
 }
 .partial_progress h5 {
     color: #fff;

@@ -33,13 +33,6 @@
                 graylight: '#EEEEEE',
                 graylighter: '#F2F1EF'
             },
-            customScroll: {
-                color: '#fff', //color of custom scroll
-                rscolor: '#fff', //color of right sidebar
-                size: '5px', //size in pixels
-                opacity: '1', //opacity
-                alwaysVisible: false //disable hide in
-            },
             header: {
                 fixed: true //fixed header
             },
@@ -62,7 +55,6 @@
             tooltips: true, //activate tooltip plugin build in bootstrap
             tables: {
                 responsive: true, //make tables resposnive
-                customscroll: true //ativate custom scroll for responsive tables
             },
             alerts: {
                 animation: true, //animation effect toggle
@@ -148,11 +140,6 @@
 
             //hoverdirection plugin
             this.hoverDirection();
-
-            //responsive tables
-            if (plugin.settings.tables.responsive) {
-                this.responsiveTables();
-            }
 
             //------------- Resize evetns -------------//
             $(window).resize(function() {
@@ -699,26 +686,6 @@ this.bind("mousewheel",fn):this.trigger("mousewheel")},unmousewheel:function(fn)
             cForm.click(function(){
                 $(this).removeClass('show');
                 sForm.removeClass('show animated fadeIn');
-            });
-        }
-
-        //responsive tables
-        plugin.responsiveTables = function () {
-            var tables = $('.table').not('.non-responsive');
-            tables.each(function( index ) {
-                $(this).wrap('<div class="table-responsive" />');
-                if(plugin.settings.tables.customscroll) {
-                    $("div.table-responsive").slimScrollHorizontal({
-                        size: plugin.settings.customScroll.size,
-                        color: plugin.settings.customScroll.color,
-                        railOpacity: plugin.settings.customScroll.opacity,
-                        width: '100%',
-                        positon: 'bottom',
-                        start: 'left',
-                        railVisible: true,
-                        distance: "3px",
-                    });
-                }
             });
         }
 

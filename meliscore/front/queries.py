@@ -93,6 +93,13 @@ def get_imgcount(itemid):
     """
     description = get_item_description(itemid)
     return len(re.findall(r'img src', description['text']))
+    
+#def get_item_score(itemid):
+    #url = URL_BASE + "items/" + itemid
+    #res = requests.get(url)
+    #data = res.json()
+    #item_score = data['listing_type_id']
+    #return item_score
 
 def get_user(userid):
     """
