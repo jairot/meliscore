@@ -1,6 +1,7 @@
 __author__ = 'francusa'
 
 import requests
+import re
 
 # Methods for making queries to ML API.
 
@@ -77,12 +78,6 @@ def get_item_description(itemid):
 
     return item_data
 
-#def get_seller_score(seller_id):
-    #url = URL_BASE + "users/" + seller_id
-    #res = requests.get(url)
-    #data = res.json()
-    #score = data["seller_reputation"]["power_seller_status"]
-    #return score
 
 def get_imgcount(itemid):
     """
@@ -92,6 +87,7 @@ def get_imgcount(itemid):
     :return: the number of images in the description.
     """
     description = get_item_description(itemid)
+<<<<<<< HEAD
     return len(re.findall(r'img src', description['text']))
     
 #def get_item_score(itemid):
@@ -100,6 +96,11 @@ def get_imgcount(itemid):
     #data = res.json()
     #item_score = data['listing_type_id']
     #return item_score
+=======
+    if description.get('text'):
+        return len(re.findall(r'img src', description['text']))
+
+>>>>>>> 47c743c997921a3f37028dd36571edb2367afdfb
 
 def get_user(userid):
     """
@@ -114,3 +115,40 @@ def get_user(userid):
     item_data = res.json()
 
     return item_data
+
+
+def get_users(users_list, attributes=None):
+    """
+    This method makes a GET to the users/users_list[0],..,users_list[N] and
+    brings the JSON public info for the item.
+    :param users_list: a list of ids (in this case a multiid request
+    is generated and the result is a list of users)
+    :param attributes: the fields to extract from the item
+    :return: the JSON returned by the API
+    """
+
+    params = {}
+    url = URL_BASE + "users/"
+    users_len = len(users_list)
+
+    if attributes:
+        params['attributes'] = ",".join(attributes)
+
+    # The ML API allows queries with at most 50 item-ids.
+    if users_len <= 50:
+        params["ids"] = ",".join(users_list)
+        res = requests.get(url, params=params)
+        users = res.json()
+    else:
+        offset = 0
+        count = 0
+        users = list()
+        while count < users_len:
+            params["ids"] = ",".join(users_list[offset:offset+50])
+            res = requests.get(url, params=params)
+            # Append the results.
+            users.extend(res.json())
+            offset += 50
+            count = len(users)
+
+    return users
