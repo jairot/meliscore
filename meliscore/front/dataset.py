@@ -32,7 +32,7 @@ def simplify_item(item, prefix, sep):
     """
 
     items = []
-    for k, v in item.items()
+    for k, v in item.items():
         new_key = prefix + sep + k if prefix else k
         if isinstance(v, collections.MutableMapping):
             items.extend(simplify_item(v, new_key, sep=sep).items())
@@ -56,11 +56,11 @@ def price_quantiles(df):
 
 def find_seller_score(df):
     scores = []
-    for index,row in df.iterrow():
+    for index,row in df.iterrows():
         seller_id = row['seller_id']
         seller_score = get_seller_score(seller_id)
         scores = scores + [seller_score]
-    return Series(scores)
+    return pd.Series(scores)
 
 def find_imgcount(items):
     imgcount = []
@@ -68,16 +68,16 @@ def find_imgcount(items):
         item_id = item['id']
         n_imgs = get_imgcount(item_id)
         imgcount = imgcount + [n_imgs]
-    return Series(imgcount)
+    return pd.Series(imgcount)
     
-def find_item_score(df):
+def find_item_score(items):
     scores = []
     for item in items:
         item_score = item["listing_type_id"]
         scores = scores + [item_score]
-    return Series(scores)
+    return pd.Series(scores)
     
-def create_dataset(item):
+def create_dataset(item, reduced=False):
     category_id = item.get('category_id')
     condition = item.get('condition')
 
@@ -99,17 +99,24 @@ def create_dataset(item):
             df = df.append(page_df)
         offset += limit
 
+    if reduced:
+        # reduce dataFrame to items with stock
+        # (from which we can calculate a selling price)
+        df = df[(df.available_quantity > 5) | (df.id == item['id'])]
+
     df_speeds = get_selling_speeds(list(df.id))
 
     df['speed'] = df_speeds.speed
 
+    df = df[(~df.speed.isnull()) | (df.id == item['id'])]
+
     items = get_items(list(df['id']))
     
-    df['seller_score'] = find_seller_score(items)
+    # df['seller_score'] = find_seller_score(df)
 
-    df['item_score'] =  find_item_score(df)
+    # df['item_score'] =  find_item_score(items)
 
-    df['n_images'] = find_imgcount(df)
+    # df['n_images'] = find_imgcount(items)
 
     df.to_csv('%s.csv' % category_id, encoding='utf-8')
 

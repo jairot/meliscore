@@ -1,6 +1,7 @@
 __author__ = 'francusa'
 
 import requests
+import re
 
 # Methods for making queries to ML API.
 
@@ -78,7 +79,7 @@ def get_item_description(itemid):
     return item_data
 
 def get_seller_score(seller_id):
-    url = URL_BASE + "users/" + seller_id
+    url = URL_BASE + "users/" + str(seller_id)
     res = requests.get(url)
     data = res.json()
     score = data["seller_reputation"]["power_seller_status"]
