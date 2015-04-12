@@ -11,7 +11,7 @@ steps = [(10, "Horrible!",
          (55, "Incompleto."," Seguí nuestros consejos para mejorar tu publicación."),
          (80, "Bastante bien.", "Seguí nuestros consejos para mejorar tu publicación."),
          (95, "Muy bien!", "Tu venta está prácticamente asegurada. Quedan detalles por pulir para que quede excelente."),
-         (100, "Excelente!!", "Talvez vos puedas darnos consejos a nosotros. Feliz venta!")]
+         (101, "Excelente!!", "Talvez vos puedas darnos consejos a nosotros. Feliz venta!")]
 
 
 def generate_scores(itemid):
@@ -61,8 +61,12 @@ def generate_scores(itemid):
         "total_score": get_total_score(partial),
         "partial_scores": partial
     }
-
-    return result
+    title = item_data["title"]
+    try:
+        photo = item_data["thumbnail"]
+    except KeyError:
+        pass
+    return result, title, photo
 
 
 def get_photo_score(item_data):
@@ -80,11 +84,12 @@ def get_photo_score(item_data):
 
 
 def get_user_score(user_data):
-    user_level = int(user_data["seller_reputation"]["level_id"][0])
-    score = user_level * 1.0 / 5
-    if user_level < 3:
+
+    score = user_data["seller_reputation"]["transactions"]["ratings"]["positive"]
+
+    if score < 0.5:
         tip = "Tienes que mejorar tu reputación como vendedor"
-    elif user_level < 4:
+    elif score < 0.9:
         tip = "Eres un buen vendedor pero podrias mejorar"
     else:
         tip = "Tu reputación como vendedor es perfecta!"
