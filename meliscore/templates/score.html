@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+
+    <p>Mostrando resultados para <a href="{{ url }}">{{ itemid }}</a></p>
+
+    <div class="row">
+        <div class="col-xs-3">
+            <div id="meliscore_scorechart" class="pie-charts teal-pie">
+                <div class="easy-pie-chart-teal" data-percent="{{ score.total_score.score|default:"58" }}">
+                {{ score.total_score.score|default:"58" }}
+                <small>%</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="partial_progress_group col-xs-9">
+            {% for partial_title, partial_value in score.partial_scores.items %}
+            <div class="partial_progress">
+                <h5>{{ partial_title|title }}</h5>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active
+                    {% if partial_value.score > 80 %}progress-bar-success
+                    {% elif partial_value.score > 60 %}progress-bar-info
+                    {% elif partial_value.score > 40 %}progress-bar-warning
+                    {% elif partial_value.score > 20 %}progress-bar-warning
+                    {% else %}progress-bar-danger{% endif %}
+                    " role="progressbar" aria-valuenow="{{ partial_value.score }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ partial_value.score }}%;">
+                    <h5 class="partial_percent">{{ partial_value.score }}%</h5>
+                    </div>
+                </div>
+                {% comment %}
+                <br>
+                {{ partial_value.tip }}
+                <br>
+                {% endcomment %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <h2>{{ score.total_score.title }}</h2>
+    <h3>{{ score.total_score.subtitle }}</h3>
+
+    </br>
+{% endblock content %}
+
+{% block extra_scripts %}
+    {{ block.super }}
+    <script src="{% static 'plugins/forms/icheck/jquery.icheck.js' %}"></script>
+    <script src="{% static 'plugins/charts/pie-chart/jquery.easy-pie-chart.js' %}"></script>
+    <script>
+        $(".easy-pie-chart-teal").easyPieChart({
+            barColor: "#1bbc9b",
+            borderColor: "#1bbc9b",
+            lineCap: 'butt',
+            lineWidth: 40,
+            scaleColor: false,
+            trackColor: "#caece5",
+            size: 160,
+            animate: 2500
+        });
+    </script>
+{% endblock extra_scripts %}
