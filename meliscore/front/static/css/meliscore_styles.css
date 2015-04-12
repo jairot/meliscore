@@ -18,6 +18,8 @@ body {
     }
 }
 
+
+/* ------ HEADER ------ */
 .header {
     padding: 2em 0;
 }
@@ -50,6 +52,8 @@ body {
     max-width: 100%;
 }
 
+
+/* ------ CONTENT ------ */
 .main-content {
     padding: 1em 0;
 }
@@ -61,6 +65,21 @@ body {
     font-weight: 400;
     margin-top: 0;
 }
+
+
+
+/* ------ FOOTER ------ */
+.footer {
+    background: #fff;
+    padding: 1em 0 2em;
+}
+.footer p {
+    font-size: 0.8em;
+    font-weight: bold;
+    margin: 0;
+}
+
+
 
 .meliscore_chart {
     width: 100%;
@@ -94,7 +113,12 @@ body {
     margin-top: 0.5em;
 }
 
-
+.section_recommendations {
+    background: #c6eeff;
+}
+.section_sweetprices {
+    background: #fff16e;
+}
 /* global */
 .alert {
     margin-bottom: 0.5em;
