@@ -74,7 +74,7 @@ def extract_features(df, itemid):
     return X, y, x
 
 
-def predict_salespeed(itemid, regr):
+def predict_salespeed(itemid):
     """
         itemid: item for which we want to predict sale speed
         regr: regression mode to be trained
