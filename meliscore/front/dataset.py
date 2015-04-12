@@ -6,6 +6,7 @@ from datetime import datetime
 from queries import *
 import numpy as np
 from pandas import DataFrame
+import os
 
 URL_BASE = "https://api.mercadolibre.com/"
 
@@ -82,41 +83,47 @@ def find_item_score(items):
 def create_dataset(item, reduced=False, extra_features=False):
     category_id = item.get('category_id')
     condition = item.get('condition')
-
-    response = requests.get(URL_BASE + 'sites/MLA/search?category={}&condition={}'.format(category_id, condition))
-    data = response.json()
-
-    limit = data['paging']['limit']
-    offset = 0
-    items_number = data['paging']['total']
-
-    while offset < items_number:
-        response = requests.get(URL_BASE + 'sites/MLA/search?category=' + category_id + '&offset=' + str(offset))
+    fname = '%s_%s_%s.csv' % (category_id, condition, 'red' if reduced else 'full')
+    
+    # TODO: guarda con el False!!!!
+    if os.path.exists(fname) and False:
+        df = pd.read_csv(fname, encoding='utf-8')
+    else:
+        response = requests.get(URL_BASE + 'sites/MLA/search?category={}&condition={}'.format(category_id, condition))
         data = response.json()
-        items = [simplify_item(i, '', '_') for i in data['results']]
-        page_df = pd.read_json(json.dumps(items))
-        if offset == 0:
-            df = page_df
-        else:
-            df = df.append(page_df)
-        offset += limit
 
-    if reduced:
-        # reduce dataFrame to items with stock
-        # (from which we can calculate a selling price)
-        df = df[(df.available_quantity > 5) | (df.id == item['id'])]
+        limit = data['paging']['limit']
+        offset = 0
+        items_number = min(data['paging']['total'], 500)
 
-    df_speeds = get_selling_speeds(list(df.id))
-    df['speed'] = df_speeds.speed
+        while offset < items_number:
+            print offset
+            response = requests.get(URL_BASE + 'sites/MLA/search?category=' + category_id + '&offset=' + str(offset))
+            data = response.json()
+            items = [simplify_item(i, '', '_') for i in data['results']]
+            page_df = pd.read_json(json.dumps(items))
+            if offset == 0:
+                df = page_df
+            else:
+                df = df.append(page_df)
+            offset += limit
 
-    if extra_features:
-        items = get_items(list(df['id']), ['id',"listing_type_id"])
-        users = get_users(list(df['id']), ['seller_reputation'])
-        df['seller_score'] = find_seller_score(users)
-        df['item_score'] = find_item_score(items)
-        df['n_images'] = find_imgcount(items)
+        if reduced:
+            # reduce dataFrame to items with stock
+            # (from which we can calculate a selling price)
+            df = df[(df.available_quantity > 5) | (df.id == item['id'])]
 
-    df.to_csv('%s.csv' % category_id, encoding='utf-8')
+        df_speeds = get_selling_speeds(list(df.id))
+        df['speed'] = df_speeds.speed
+
+        if extra_features:
+            items = get_items(list(df['id']), ['id',"listing_type_id"])
+            users = get_users(list(df['id']), ['seller_reputation'])
+            df['seller_score'] = find_seller_score(users)
+            df['item_score'] = find_item_score(items)
+            df['n_images'] = find_imgcount(items)
+
+        df.to_csv(fname, encoding='utf-8')
 
     return df
 

@@ -7,6 +7,7 @@ from django.http import JsonResponse
 
 
 from sweet_price_spot import get_sweet_spots
+from sale_speed_prediction import predict_sale_speed
 from modelo import generate_scores
 
 
@@ -33,4 +34,11 @@ def sweetspot(request, itemid=None, *args, **kwargs):
     results = get_sweet_spots(itemid)
     data = {"data": results}
     return JsonResponse(data)
+
+
+def salespeed(request, itemid=None, *args, **kwargs):
+    results = predict_sale_speed(itemid)
+    data = {"data": results}
+    return JsonResponse(data)
+
 
