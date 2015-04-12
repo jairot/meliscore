@@ -38,6 +38,7 @@ def generate_scores(itemid):
         pass
     else:
         partial["fotos"] = {"score": int(score*100), "tip": tip}
+    
     # description score
     try:
         description = get_item_description(itemid)

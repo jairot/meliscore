@@ -61,7 +61,20 @@ def create_dataset(item):
 
     df.to_csv('%s.csv' % category_id, encoding='utf-8')
 
+    df['elapsed_time'] = datetime.now() - data.start_time
+    df['elapsed_days'] = data.elapsed_time / np.timedelta64(1,'D')
+    df['speed'] = data.sold_quantity / data.elapsed_days
+
     return df
+
+
+def create_dataset_from_item(item):
+    """
+    Create the dataset from an item dict.
+    :param item: the item dict.
+    :return:
+    """
+    create_dataset(item.get('category_id'))
 
 
 if __name__ == '__main__':

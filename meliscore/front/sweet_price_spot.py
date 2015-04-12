@@ -65,17 +65,18 @@ if __name__ == '__main__':
     # usados.price.describe()
     big = df[df.available_quantity > 5]
     selling_speeds = get_selling_speeds(list(big.id))
+<<<<<<< HEAD
+    quartiles = rellenar()
+=======
     print selling_speeds.columns
 
     quartiles = price_quartiles(df)
 
+>>>>>>> a25762be3bc590c40d205f4537846410272e61c9
     quartile_speeds = get_quartile_speeds(quartiles, selling_speeds)
     
 
 
-
-# Idea: dar selling speed por precio
-# y encontrar selling_speed medio de cada cuartil
 
 # Ejemplos:
 # "id": "MLA119876",

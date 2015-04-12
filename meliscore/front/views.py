@@ -5,8 +5,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import JsonResponse
 
-
 from modelo import generate_scores
+
 
 def home(request, *args, **kwargs):
     return render_to_response('index.html', locals(),
@@ -20,8 +20,8 @@ def score(request, itemid=None, *args, **kwargs):
         try:
             itemid = re.findall("MLA-\d+", url)[0]
         except IndexError:
-            #TODO: retornar al home con un mensaje de error
-            pass
+            return render_to_response('index.html', {'error_msg': 'Not a valid URL'},
+                                      context_instance=RequestContext(request))
 
     itemid  = itemid.replace("-", "")
     score, title, photo = generate_scores(itemid)
