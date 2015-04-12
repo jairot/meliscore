@@ -38,7 +38,7 @@ def simplify_item(item, prefix, sep):
             items.extend(simplify_item(v, new_key, sep=sep).items())
         else:
             items.append((new_key, v))
-        
+
     return dict(items)
 
 
@@ -69,14 +69,14 @@ def find_imgcount(items):
         n_imgs = get_imgcount(item_id)
         imgcount = imgcount + [n_imgs]
     return Series(imgcount)
-    
+
 def find_item_score(df):
     scores = []
     for item in items:
         item_score = item["listing_type_id"]
         scores = scores + [item_score]
     return Series(scores)
-    
+
 def create_dataset(item):
     category_id = item.get('category_id')
     condition = item.get('condition')
@@ -107,7 +107,7 @@ def create_dataset(item):
     df['speed'] = df_speeds.speed
 
     items= get_items(list(df['id']))
-    
+
     df['seller_score'] = find_seller_score(items)
 
     df['item_score'] =  find_item_score(df)
