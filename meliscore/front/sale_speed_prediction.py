@@ -115,7 +115,7 @@ def predict_salespeed(itemid):
 
     print "\nPredicted sale speed %.1f items per day" % sale_speed
 
-    return {"predicted_sale_speed": sale_speed[0]}
+    return {"predicted_sale_speed": round(sale_speed[0])}
 
 
 if __name__ == '__main__':
