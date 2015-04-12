@@ -83,9 +83,10 @@ def find_item_score(items):
 def create_dataset(item, reduced=False, extra_features=False):
     category_id = item.get('category_id')
     condition = item.get('condition')
-    fname = '%s_%s.csv' % (category_id, condition)
+    fname = '%s_%s_%s.csv' % (category_id, condition, 'red' if reduced else 'full')
     
-    if os.path.exists(fname):
+    # TODO: guarda con el False!!!!
+    if os.path.exists(fname) and False:
         df = pd.read_csv(fname, encoding='utf-8')
     else:
         response = requests.get(URL_BASE + 'sites/MLA/search?category={}&condition={}'.format(category_id, condition))
@@ -93,7 +94,7 @@ def create_dataset(item, reduced=False, extra_features=False):
 
         limit = data['paging']['limit']
         offset = 0
-        items_number = min(data['paging']['total'], 1000)
+        items_number = min(data['paging']['total'], 500)
 
         while offset < items_number:
             print offset

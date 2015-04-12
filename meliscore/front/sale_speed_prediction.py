@@ -79,6 +79,14 @@ def predict_salespeed(itemid, regr):
         itemid: item for which we want to predict sale speed
         regr: regression mode to be trained
     """
+    svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
+    # svr_lin = SVR(kernel='linear', C=1e3)
+    # svr_poly = SVR(kernel='poly', C=1e3, degree=2)
+    # regr = linear_model.LinearRegression()
+    
+    regr = svr_rbf
+
+
     item = get_item(itemid)
 
     print "Creating dataset of similar items (same category and condition)"
@@ -105,13 +113,10 @@ def predict_salespeed(itemid, regr):
 
     sale_speed = regr.predict(x)
 
-    # import ipdb; ipdb.set_trace()
     print "\nPredicted sale speed %.1f items per day" % sale_speed
 
     return {"predicted_sale_speed": sale_speed}
 
-# def eval_lin_regr():
-#     pass
 
 if __name__ == '__main__':
     # Ejemplos:
@@ -122,10 +127,4 @@ if __name__ == '__main__':
     itemid = "MLA550874381"
 
     # Regression model
-    svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
-    # svr_lin = SVR(kernel='linear', C=1e3)
-    # svr_poly = SVR(kernel='poly', C=1e3, degree=2)
-    # regr = linear_model.LinearRegression()
-    
-    regr = svr_rbf
-    sale_speed = predict_salespeed(itemid, regr)
+    sale_speed = predict_salespeed(itemid)
