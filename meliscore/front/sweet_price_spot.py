@@ -29,7 +29,10 @@ def price_quartiles(df):
         raise NameError('price column does not exist')
     
 def get_quartile_speeds(quartiles, selling_speeds):
-    pass
+    first = quartiles[0]
+    second = quartiles[1]
+    third = quartiles[2]
+    
 
 def get_sweet_spot(itemids):
     pass
@@ -43,8 +46,7 @@ if __name__ == '__main__':
     big = df[df.available_quantity > 5]
     selling_speeds = get_selling_speeds(list(big.id))
 
-    quartiles = ()
-    
+    quartiles = price_quartiles(df)
     quartile_speeds = get_quartile_speeds(quartiles, selling_speeds)
 
 
