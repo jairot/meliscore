@@ -14,7 +14,7 @@ def get_selling_speeds(itemids):
         the number of items sold by hour since
         the beginning of the sale
     """
-    data = get_item(itemids, ["id","start_time","sold_quantity", "price"])
+    data = get_items(itemids, ["id","start_time","sold_quantity", "price"])
     data = pd.read_json(json.dumps(data))
     data['elapsed_time'] = datetime.now() - data.start_time
     # data['elapsed_hours'] = data.elapsed_time / np.timedelta64(1,'h')
@@ -76,9 +76,6 @@ def create_dataset(item):
         else:
             df = df.append(page_df)
         offset += limit
-
-    # TODO: remove (esperando a q Francusa haga get_items)
-    df = df[:40]
 
     df_speeds = get_selling_speeds(list(df.id))
 
