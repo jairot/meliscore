@@ -22,11 +22,6 @@ if (isAndroid) {
 //doc ready function
 $(document).ready(function() {
 
- 	//Disable certain links
-    $('a[href^=#]').click(function (e) {
-        e.preventDefault()
-    })
-
  	//------------- Init our plugin -------------//
  	$('body').appStart({
         //main color scheme for template
