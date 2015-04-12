@@ -6,20 +6,6 @@ from datetime import datetime
 from queries import *
 from dataset import *
 
-def get_selling_speeds(itemids):
-    """
-        Given a list of itemids it calculates
-        the number of items sold by hour since
-        the beginning of the sale
-    """
-    data = get_item(itemids, ["id","start_time","sold_quantity", "price"])
-    data = pd.read_json(json.dumps(data))
-    data['elapsed_time'] = datetime.now() - data.start_time
-    # data['elapsed_hours'] = data.elapsed_time / np.timedelta64(1,'h')
-    data['elapsed_days'] = data.elapsed_time / np.timedelta64(1,'D')
-    data['speed'] = data.sold_quantity / data.elapsed_days
-
-    return data[['price', 'speed']]
 
 def price_quartiles(df):
     if('price' in df.columns):
@@ -65,14 +51,11 @@ if __name__ == '__main__':
     # usados.price.describe()
     big = df[df.available_quantity > 5]
     selling_speeds = get_selling_speeds(list(big.id))
-<<<<<<< HEAD
-    quartiles = rellenar()
-=======
+
     print selling_speeds.columns
 
     quartiles = price_quartiles(df)
 
->>>>>>> a25762be3bc590c40d205f4537846410272e61c9
     quartile_speeds = get_quartile_speeds(quartiles, selling_speeds)
     
     print quartiles

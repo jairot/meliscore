@@ -5,6 +5,7 @@ from sklearn import linear_model
 from sklearn.cross_validation import train_test_split
 from dataset import create_dataset
 import pandas as pd
+from queries import get_item
 
 
 def create_featurized_dataset(itemid):
@@ -76,7 +77,9 @@ if __name__ == '__main__':
     # condition = "new"
     itemid = "MLA550874381"
     
-    df = create_dataset(itemid)
+    item = get_item(itemid)
+
+    df = create_dataset(item)
 
     # reduce dataFrame to items with stock
     # (from which we can calculate a selling price)
