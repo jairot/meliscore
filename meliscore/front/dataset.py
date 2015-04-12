@@ -32,7 +32,7 @@ def simplify_item(item, prefix, sep):
     """
 
     items = []
-    for k, v in item.items():
+    for k, v in item.items()
         new_key = prefix + sep + k if prefix else k
         if isinstance(v, collections.MutableMapping):
             items.extend(simplify_item(v, new_key, sep=sep).items())
@@ -70,7 +70,6 @@ def find_imgcount(df):
         imgcount = imgcount + [n_imgs]
     return Series(imgcount)
     
-def 
     
 def create_dataset(item):
     category_id = item.get('category_id')
@@ -98,12 +97,11 @@ def create_dataset(item):
 
     df['speed'] = df_speeds.speed
 
-    
-    df['seller_score'] = find_seller_score(df)
+    # df['seller_score'] = find_seller_score(df)
 
-    df['item_score'] = find_imgcount(df)
+    # df['item_score'] = ...
 
-    # df['n_images'] = ...
+    # df['n_images'] = find_imgcount(df)
 
     df.to_csv('%s.csv' % category_id, encoding='utf-8')
 
