@@ -34,6 +34,8 @@ def extract_features(df, itemid):
 
         y (learned variable): selling_speed
     """
+    df = df[(~df.speed.isnull()) | (df.id == itemid)]
+
     fdf = pd.DataFrame()
     fdf['id'] = df.id
 
@@ -49,21 +51,25 @@ def extract_features(df, itemid):
 
     # fdf['seller_score'] = df.seller_score / df.seller_score.max()
 
-    # fdf['item_score'] = ...
+    # mapear gold, silver, etc... a números
+    # def map_score(score):
+    #     pass
+
+    # fdf['item_score'] = df.item_score.apply(map_score) 
 
     # fdf['n_images'] = df.n_images / df.n_images.max()
 
     fdf['list_ranking'] = df.index * 1.0 / len(df)
 
-    fdf = fdf[fdf.id != itemid]
     features_item = fdf[fdf.id == itemid]
+    fdf = fdf[fdf.id != itemid]
 
     del features_item['id']
     del fdf['id']
 
     X = fdf.values
     y = df[df.id != itemid].speed.values
-    x = features_item.values
+    x = features_item.values[0]
 
     return X, y, x
 
@@ -99,8 +105,8 @@ def predict_salespeed(itemid, regr):
 
     sale_speed = regr.predict(x)
 
-    import ipdb; ipdb.set_trace()
-    print "\nPredicted sale speed %.1f items per day" % sale_speed.values()
+    # import ipdb; ipdb.set_trace()
+    print "\nPredicted sale speed %.1f items per day" % sale_speed
 
     return {"predicted_sale_speed": sale_speed}
 

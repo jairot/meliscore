@@ -20,6 +20,7 @@ def get_selling_speeds(itemids):
     data['elapsed_time'] = datetime.now() - data.start_time
     # data['elapsed_hours'] = data.elapsed_time / np.timedelta64(1,'h')
     data['elapsed_days'] = data.elapsed_time / np.timedelta64(1,'D')
+
     data['speed'] = data.sold_quantity / data.elapsed_days
 
     return data[['price', 'speed']]
@@ -78,7 +79,7 @@ def find_item_score(items):
         scores = scores + [item_score]
     return pd.Series(scores)
     
-def create_dataset(item, reduced=False):
+def create_dataset(item, reduced=False, extra_features=False):
     category_id = item.get('category_id')
     condition = item.get('condition')
 
@@ -106,17 +107,14 @@ def create_dataset(item, reduced=False):
         df = df[(df.available_quantity > 5) | (df.id == item['id'])]
 
     df_speeds = get_selling_speeds(list(df.id))
-
     df['speed'] = df_speeds.speed
 
-    items = get_items(list(df['id']), ['id',"listing_type_id"])
-    users = get_users(list(df['id']), ['seller_reputation'])
-    
-    df['seller_score'] = find_seller_score(users)
-
-    df['item_score'] =  find_item_score(items)
-
-    df['n_images'] = find_imgcount(items)
+    if extra_features:
+        items = get_items(list(df['id']), ['id',"listing_type_id"])
+        users = get_users(list(df['id']), ['seller_reputation'])
+        df['seller_score'] = find_seller_score(users)
+        df['item_score'] = find_item_score(items)
+        df['n_images'] = find_imgcount(items)
 
     df.to_csv('%s.csv' % category_id, encoding='utf-8')
 
