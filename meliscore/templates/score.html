@@ -2,14 +2,14 @@
 
 {% load static %}
 
-{% block meta_title %}Scoring para <a href="{{ url }}">{{ title }}</a>{% endblock meta_title %}
+{% block meta_title %}Scoring para {{ title }}{% endblock meta_title %}
 {% block title %}Scoring para <a href="{{ url }}">{{ title }}</a>{% endblock title %}
 
 {% block content %}
     <div class="col-lg-12 col-md-12">
 
-        <div class="row">
-            <div class="col-xs-3">
+        <div class="row section_results">
+            <div class="col-xs-5 col-sm-3">
                 <div id="meliscore_chart" class="pie-charts
                     {% if score.total_score.score > 95 %}success
                     {% elif score.total_score.score > 80 %}lime
@@ -23,12 +23,12 @@
                 </div>
             </div><!-- .col-xs-3 -->
 
-            <div class="partial_progress_group col-xs-9">
+            <div class="partial_progress_group col-xs-7 col-sm-9">
                 {% for partial_title, partial_value in score.partial_scores.items %}
                 <div class="partial_progress">
-                    <h5>{{ partial_title|title }}</h5>
+                    <h5 class="partial_title">{{ partial_title|title }}</h5>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped
+                        <div class="progress-bar
                         progress-bar-{% if partial_value.score > 95 %}success
                         {% elif partial_value.score > 80 %}lime
                         {% elif partial_value.score > 55 %}yellow
@@ -46,9 +46,7 @@
                 </div><!-- .partial_progress -->
                 {% endfor %}
             </div><!-- .partial_progress-group -->
-        </div><!-- .row-->
 
-        <div class="row">
             <div class="col-xs-12">
                 <h2 class="text-{% spaceless %}
                 {% if score.total_score.score > 95 %}success
@@ -70,6 +68,12 @@
         <div class="row section_sweetprices">
             <div class="col-xs-12">
                 {% include "sweetprice.html" %}
+            </div>
+        </div><!-- .row-->
+
+        <div class="row section_salesspeed">
+            <div class="col-xs-12">
+                {% include "sales_speed.html" %}
             </div>
         </div><!-- .row-->
 

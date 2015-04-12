@@ -38,6 +38,12 @@ body {
         margin-left: 3.2em;
     }
 }
+@media (max-width: 500px) {
+    .header h1 {
+        font-size: 1.25em;
+        margin-left: 4.2em;
+    }
+}
 .header .meliscore_logo {
     float: left;
     height: 4em;
@@ -98,11 +104,14 @@ body {
     margin: 0;
     padding-left: 1em;
     position: absolute;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+}
+.partial_progress .partial_title {
 }
 .partial_progress .partial_percent {
-    padding-right: 1em;
-    position: relative;
-    right: 0;
+    font-size: 1em;
+    line-height: 2.5em;
+    right: 2em;
     text-align: right;
 }
 .partial_progress .progress {
@@ -112,11 +121,45 @@ body {
     margin-top: 0.5em;
 }
 
+.section_results {
+    padding-bottom: 2em;
+    padding-top: 2em;
+}
 .section_recommendations {
     background: #c6eeff;
+    margin-top: 2em;
 }
 .section_sweetprices {
     background: #fff16e;
+    margin-top: 2em;
+}
+.section_salesspeed {
+    background: #ffd6ad;
+}
+
+/* --- Recommendations section --- */
+.recom {
+    background: #fff171;  /* light yellow */
+    box-shadow: 0 0.5em 1em rgba(0,0,0,.1);
+}
+.recom.recom_description {
+}
+.recom.recom_photos {
+}
+.recom.recom_clothing {
+}
+.recom .panel {
+    background: transparent;
+}
+.recom .panel-title {
+    font-size: 1.5em;
+}
+.recom h5 {
+    font-size: 1em;
+}
+.recom p {
+    background: rgba(255,255,255,.4);
+    padding: 1em;
 }
 
 .loading_bars {
