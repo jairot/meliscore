@@ -26,7 +26,7 @@
             <div class="partial_progress_group col-xs-7 col-sm-9">
                 {% for partial_title, partial_value in score.partial_scores.items %}
                 <div class="partial_progress">
-                    <h5 class="partial_title">{{ partial_title|title }}</h5>
+                    <a href="#recom_{{ partial_title }}"><h5 class="partial_title">{{ partial_title|title }}</h5></a>
                     <div class="progress">
                         <div class="progress-bar
                         progress-bar-{% if partial_value.score > 95 %}success
@@ -71,7 +71,10 @@
             </div>
         </div><!-- .row-->
 
-        <div class="row section_salesspeed">
+        {% comment %}
+            If we got no data about sale speed, we don't show it.
+        {% endcomment %}
+        <div class="row section_salesspeed hidden">
             <div class="col-xs-12">
                 {% include "sales_speed.html" %}
             </div>
@@ -111,21 +114,6 @@
     <script src="{% static 'plugins/charts/flot/jquery.flot.tooltip.min.js' %}"></script>
 
     <script>
-    //------------- Bars chart -------------//
-    $(function () {
-        // showing Loading...
-        $('.loading_bars').toggleClass("hidden", false);
-        $.get("/sweetspot/{{ itemid }}")
-         .success(function(dataset) {
-            renderBars(dataset);
-         })
-         .error(function(){
-            console.log("Error looking up sales");
-            $('.loading_bars').toggleClass("hidden", true);
-            $('.nothing_found').toggleClass("hidden", false);
-         });
-    });
-
     function renderBars(data) {
         var chartColours = ['#3fc3a8', '#ed7a53', '#9FC569', '#bbdce3', '#9a3b1b', '#5a8022', '#2c7282'];
 
@@ -163,10 +151,42 @@
                 tickLength: 0
             }
         };
-
         // hiding Loading...
         $('.loading_bars').toggleClass("hidden", true);
         $.plot($("#meliscore_ordered-bars-chart"), [data,], options);
     }
+
+    //------------- Bars chart -------------//
+    function getSweetSpots() {
+        // showing Loading...
+        $('.section_sweetprices .loading_bars').toggleClass("hidden", false);
+        $.get("{% url 'sweetspot' itemid %}")
+            .success(function(dataset) {
+                renderBars(dataset);
+            })
+            .error(function(){
+                console.log("Error looking up sales sweet spots");
+                $('.section_sweetprices .loading_bars').toggleClass("hidden", true);
+                $('.nothing_found').toggleClass("hidden", false);
+            });
+    }
+
+    //------------- Sales speed magic number -------------//
+    function getSalesSpeed() {
+        $.get("{% url 'salespeed' itemid %}")
+            .success(function(data) {
+                // if number arrives, we show the info
+                $('.sales_speed_hope').html(data.data.predicted_sale_speed);
+                $('.section_salesspeed').removeClass('hidden');
+            })
+            .error(function(){
+                console.log("Error looking up sale speed");
+            });
+    }
+
+    $(function() {
+        getSalesSpeed();
+        getSweetSpots();
+    });
 </script>
 {% endblock extra_scripts %}
