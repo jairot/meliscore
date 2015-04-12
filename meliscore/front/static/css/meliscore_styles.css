@@ -93,3 +93,12 @@ body {
 .partial_progress + .partial_progress {
     margin-top: 0.5em;
 }
+
+
+/* global */
+.alert {
+    margin-bottom: 0.5em;
+}
+.close {
+    font-size: 30px;
+}

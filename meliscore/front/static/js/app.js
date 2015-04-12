@@ -27,9 +27,6 @@ $(document).ready(function() {
         e.preventDefault()
     })
 
-    //------------- Highlight code  -------------//
-    hljs.initHighlightingOnLoad();
-
  	//------------- Init our plugin -------------//
  	$('body').appStart({
         //main color scheme for template
