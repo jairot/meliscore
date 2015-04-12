@@ -44,21 +44,31 @@
     </head>
 
     <body>
-        <header>
+        <div class="header row">
         {% block header %}
-        <img src="{% static 'img/meliscore_logo.png' %}" alt="MELIScore" class="meliscore_logo">
-        <h1>{% block title %}MELIScore{% endblock title %}</h1>
-        <div class="ml_logo_container">
-            <img src="{% static 'img/ml_logo.png' %}" alt="">
+        <div class="col-xs-9 col-md-10">
+            <img src="{% static 'img/meliscore_logo.png' %}" alt="MELIScore" class="meliscore_logo">
+            <h1>{% block title %}MELIScore{% endblock title %}</h1>
+        </div>
+        <div class="col-xs-3 col-md-2">
+            <div class="ml_logo_container">
+                <img src="{% static 'img/ml_logo.png' %}" alt="">
+            </div>
         </div>
         {% endblock header %}
-        </header>
+        </div><!-- .header -->
 
-        <div class="main-content">
-        {% block content %}
-            Hola! Este contenido debe ser reemplazado por un template hijo.
-            Si ves esto, corre y patea a tu developer más cercano.
-        {% endblock content %}
+        <div class="row">
+            <div class="col-xs-12">
+
+            <div class="main-content row">
+            {% block content %}
+                Hola! Este contenido debe ser reemplazado por un template hijo.
+                Si ves esto, corre y patea a tu developer más cercano.
+            {% endblock content %}
+            </div><!-- .main-content.row -->
+
+            </div>
         </div>
 
         {% block scripts %}
