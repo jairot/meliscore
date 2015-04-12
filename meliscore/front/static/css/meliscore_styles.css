@@ -21,6 +21,7 @@ body {
 
 /* ------ HEADER ------ */
 .header {
+    border-bottom: 1px solid #eee;
     padding: 2em 0;
 }
 .header h1 {
@@ -108,6 +109,9 @@ body {
 }
 .partial_progress .partial_title {
 }
+.partial_progress .partial_title:hover {
+    text-decoration: underline;
+}
 .partial_progress .partial_percent {
     font-size: 1em;
     line-height: 2.5em;
@@ -142,11 +146,11 @@ body {
     background: #fff171;  /* light yellow */
     box-shadow: 0 0.5em 1em rgba(0,0,0,.1);
 }
-.recom.recom_description {
+.recom.recom_descriction {
 }
-.recom.recom_photos {
+.recom.recom_fotos {
 }
-.recom.recom_clothing {
+.recom.recom_indumentario {
 }
 .recom .panel {
     background: transparent;
