@@ -33,7 +33,7 @@ def generate_scores(itemid):
     # photo score
     item_data = get_item(itemid)
     try:
-        score, tip =  get_photo_score(item_data)
+        score, tip = get_photo_score(item_data)
     except:
         pass
     else:
@@ -112,11 +112,11 @@ def get_description_score(description):
     desc_len = strcount + imgcount * 100
     score = min(desc_len, MAX_DESC_LEN) * 1.0 / MAX_DESC_LEN
     if score <= 0.5:
-        tip = "La descripcion esta muy floja, explayate un poco más!"
+        tip = "La descripción esta muy floja, explayate un poco más!"
     elif score <= 0.8:
-        tip = "La descripcion es suficiente pero podria estar más completa"
+        tip = "La descripción es suficiente pero podria estar más completa"
     else:
-        tip = "Tu descrición esta perfecta!"
+        tip = "Tu descripción esta perfecta!"
 
     return score, tip
 
@@ -131,8 +131,10 @@ def get_total_score(partial_scores):
             break
     return result
 
+
 def average(it):
     return sum(it)/len(it)
+
 
 if __name__ == '__main__':
     # URL ejemplo
