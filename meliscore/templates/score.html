@@ -109,19 +109,20 @@
     <script>
     //------------- Bars chart -------------//
     $(function () {
-        //var data = [ ["JAN", 1500], ["FEB", 1345], ["MAR", 1800], ["APR", 1670], ["MAY", 1780], ["JUN", 1500], ["JUL", 1350], ["AUG", 1700], ["SEP", 1890], ["OCT", 2000], ["NOV", 1950], ["DEC", 2000] ];
-        var data = [["< 6000", 2.2 ], ["6000-7000", 3.3], ["7000-8000", 5], ["> 8000", 2]];
-        //Replicate the existing bar data to reproduce bar fill effect
-        // var arr= [];
-        // for (var i = 0; i <= data.length -1; i++) {
-        //     arr.push(data[i][1]);
-        // };
-        // var largest = Math.max.apply(Math, arr) + 50;
-        // var d1 = [];
-        // for (var i = 0; i <= data.length -1; i++) {
-        //     sum = largest - data[i][1];
-        //     d1.push([data[i][0],sum]);
-        // };
+        // showing Loading...
+        $('.loading_bars').toggleClass("hidden", false);
+        $.get("/sweetspot/{{ itemid }}")
+         .success(function(dataset) {
+            renderBars(dataset);
+         })
+         .error(function(){
+            console.log("Error looking up sales");
+            $('.loading_bars').toggleClass("hidden", true);
+            $('.nothing_found').toggleClass("hidden", false);
+         });
+    });
+
+    function renderBars(data) {
         var chartColours = ['#3fc3a8', '#ed7a53', '#9FC569', '#bbdce3', '#9a3b1b', '#5a8022', '#2c7282'];
 
         var options = {
@@ -159,7 +160,9 @@
             }
         };
 
+        // hiding Loading...
+        $('.loading_bars').toggleClass("hidden", true);
         $.plot($("#meliscore_ordered-bars-chart"), [data,], options);
-    });
+    }
 </script>
 {% endblock extra_scripts %}
