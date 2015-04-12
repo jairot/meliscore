@@ -53,8 +53,25 @@ def price_quantiles(df):
         return q
     else:
         raise NameError('price column does not exist')
-    
 
+def find_seller_score(df):
+    scores = []
+    for index,row in df.iterrows():
+        seller_id = row['seller_id']
+        seller_score = get_seller_score(seller_id)
+        scores = scores + [seller_score]
+    return Series(scores)
+
+def find_imgcount(df):
+    imgcount = []
+    for index,row in df.iterrows():
+        item_id = row['id']
+        n_imgs = get_imgcount(item_id)
+        imgcount = imgcount + [n_imgs]
+    return Series(imgcount)
+    
+def 
+    
 def create_dataset(item):
     category_id = item.get('category_id')
     condition = item.get('condition')
@@ -85,9 +102,10 @@ def create_dataset(item):
 
     df['speed'] = df_speeds.speed
 
-    # df['seller_score'] = ...
+    
+    df['seller_score'] = find_seller_score(df)
 
-    # df['item_score'] = ...
+    df['item_score'] = find_imgcount(df)
 
     # df['n_images'] = ...
 
