@@ -1,55 +1,12 @@
-<script>
-//------------- Bars chart -------------//
-$(function () {
+<h2>Velocidad de Ventas por precios <small>(Items/D&iacute;a)</small></h2>
 
-    var data = [["< 6000", 2.2 ], ["6000-7000", 3.3], ["7000-8000", "5"], ["> 8000", 2]];
-    //Replicate the existing bar data to reproduce bar fill effect
-    var arr= [];
-    for (var i = 0; i <= data.length -1; i++) {
-        arr.push(data[i][1]);
-    };
-    var largest = Math.max.apply(Math, arr) + 50;
-    d1 = [];
-    for (var i = 0; i <= data.length -1; i++) {
-        sum = largest - data[i][1];
-        d1.push([data[i][0],sum]);
-    };
+<div class="loading_bars hidden">Cargando...</div>
 
-    var options = {
-        series : {
-            stack: true
-        },
-        bars: {
-            show:true,
-            barWidth: 0.5,
-            fill:1,
-            align: "center"
-        },
-        grid: {
-            show:true,
-            hoverable: true,
-            borderWidth: 0,
-            borderColor:null
-        },
-        colors: chartColours,
-        tooltip: true, //activate tooltip
-        tooltipOpts: {
-            content: "$%y.0",
-            shifts: {
-                x: -30,
-                y: -50
-            }
-        },
-        yaxis: {
-            tickLength: 0,
-            show:false
-        },
-        xaxis: {
-            mode: "categories",
-            tickLength: 0
-        }
-    };
+<div class="nothing_found alert alert-warning fade in hidden">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <i class="im-warning alert-icon s24"></i>
+    <strong>¯\_(ツ)_/¯</strong>No se encontraron ventas realizadas con el producto referido.
+</div>
 
-    $.plot($("#bars-chart"), [data, d1], options);
-});
-</script>
+<div id="meliscore_ordered-bars-chart" style="height: 9em;">
+</div>
