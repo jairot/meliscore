@@ -7,7 +7,7 @@ from django.http import JsonResponse
 
 
 from sweet_price_spot import get_sweet_spots
-from sale_speed_prediction import predict_sale_speed
+from sale_speed_prediction import predict_salespeed
 from modelo import generate_scores
 
 
