@@ -24,6 +24,6 @@ def score(request, itemid=None, *args, **kwargs):
             pass
 
     itemid  = itemid.replace("-", "")
-    score = generate_scores(itemid)
+    score, title, photo = generate_scores(itemid)
     return render_to_response('score.html', locals(),
                               context_instance=RequestContext(request))

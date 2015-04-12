@@ -37,8 +37,11 @@ def price_quantiles(df):
         raise NameError('price column does not exist')
     
 
-def create_dataset(category_id):
-    response = requests.get(URL_BASE + 'sites/MLA/search?category=' + category_id)
+def create_dataset(item):
+    category_id = item.get('category_id')
+    condition = item.get('condition')
+
+    response = requests.get(URL_BASE + 'sites/MLA/search?category={}&condition={}'.format(category_id, condition))
     data = response.json()
 
     limit = data['paging']['limit']
@@ -59,16 +62,6 @@ def create_dataset(category_id):
     df.to_csv('%s.csv' % category_id, encoding='utf-8')
 
     return df
-
-
-def create_dataset_from_item(item):
-    """
-    Create the dataset from an item dict.
-    :param item: the item dict.
-    :return:
-    """
-
-    create_dataset(item.get('category_id'))
 
 
 if __name__ == '__main__':
