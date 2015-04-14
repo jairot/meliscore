@@ -35,7 +35,6 @@ def generate_scores(itemid):
     }
     
     # traer descripción
-<<<<<<< HEAD:modelo.py
     url_description = URL_BASE + 'items/' + itemid + '/description'
     response_description = requests.get (URL_BASE + 'items/' + itemid + '/description')
     description=response_description.json()
@@ -44,14 +43,6 @@ def generate_scores(itemid):
     partial["description"] = {
         "score": score,
         "tip": "Media pila che!"
-=======
-    desc_data = {}
-
-    score, tip = get_description_score(desc_data)
-    partial["description"] = {
-        "score": score,
-        "tip": tip
->>>>>>> 428f02ec6412404eb53539184031e64e568c0451:meliscore/front/modelo.py
     }
 
     # traer user score
@@ -106,7 +97,6 @@ def get_user_score(user_data):
 def get_total_score(partial_scores):
     return average([p["score"] for p in partial_scores.values()])
 
-<<<<<<< HEAD:modelo.py
 def count_images_from_description (description):
     return len(re.findall(r'img src', description['text']))
     
@@ -123,8 +113,6 @@ def get_description_score(description):
     imgcount = count_images_from_description(description)
     return strcount + imgcount * 100
 
-=======
->>>>>>> 428f02ec6412404eb53539184031e64e568c0451:meliscore/front/modelo.py
 
 if __name__ == '__main__':
     # URL ejemplo
