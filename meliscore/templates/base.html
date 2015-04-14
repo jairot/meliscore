@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>MELIScore - Mejorá tus chances de vender tu producto en MercadoLibre</title>
+
+        {% block styles %}
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+        <link rel="stylesheet" href="{% static 'css/meliscore_styles.css' %}">
+        {% endblock styles %}
+    </head>
+
+    <body>
+        {% block content %}
+            Hola! Este contenido debe ser reemplazado por un template hijo.
+            Si ves esto, corre y patea a tu developer más cercano.
+        {% endblock content %}
+
+        {% block scripts %}
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        {% endblock scripts %}
+    </body>
+</html>

@@ -28,6 +28,55 @@ def generate_scores(itemid):
     res = requests.get(url)
     item_data = res.json()
 
+    score, tip =  get_photo_score(item_data)
+    partial["photo"] = {
+        "score": score,
+        "tip": tip
+    }
+    
+    # traer descripción
+<<<<<<< HEAD:modelo.py
+    url_description = URL_BASE + 'items/' + itemid + '/description'
+    response_description = requests.get (URL_BASE + 'items/' + itemid + '/description')
+    description=response_description.json()
+    score = get_description_score(description)
+
+    partial["description"] = {
+        "score": score,
+        "tip": "Media pila che!"
+=======
+    desc_data = {}
+
+    score, tip = get_description_score(desc_data)
+    partial["description"] = {
+        "score": score,
+        "tip": tip
+>>>>>>> 428f02ec6412404eb53539184031e64e568c0451:meliscore/front/modelo.py
+    }
+
+    # traer user score
+    seller_id = item_data['seller_id']
+    url = URL_BASE + "users/%d" % seller_id
+    user_data = requests.get(url).json()
+    
+    score, tip = get_user_score(user_data)
+    partial["user_score"] = {
+        "score": score,
+        "tip": tip
+    }
+
+    # calcular score final
+    result = {
+        "total_score": get_total_score(partial),
+        "partial_scores": partial
+    }    
+
+    return result
+
+def get_description_score(desc_data):
+    return 0, ""
+
+def get_photo_score(item_data):
     n_photos = len(item_data["pictures"])
     score = min(6, n_photos) * 1.0 / 6
 
@@ -38,40 +87,26 @@ def generate_scores(itemid):
     else:
         tip = "De diego!"
 
-    partial["photo"] = {
-        "score": score,
-        "tip": tip
-    }
-    
-    # traer descripción
-    url_description = URL_BASE + 'items/' + itemid + '/description'
-    response_description = requests.get (URL_BASE + 'items/' + itemid + '/description')
-    description=response_description.json()
-    score = get_description_score(description)
-
-    partial["description"] = {
-        "score": score,
-        "tip": "Media pila che!"
-    }
-
-    # traer user score
-    partial["user_score"] = {
-        "score": 0,
-        "tip": "Media pila che!"
-    }
+    return score, tip
 
 
-    # calcular score final
-    result = {
-        "total_score": get_total_score(partial),
-        "partial_scores": partial
-    }    
+def get_user_score(user_data):
+    user_level = int(user_data["seller_reputation"]["level_id"][0])
+    score = user_level * 1.0 / 5
+    if user_level < 3:
+        tip = "Flojísimo!"
+    elif user_level < 4:
+        tip = "Va queriendo"
+    else:
+        tip = "bien ahí!"
 
-    return result
+    return score, tip
+
 
 def get_total_score(partial_scores):
     return average([p["score"] for p in partial_scores.values()])
 
+<<<<<<< HEAD:modelo.py
 def count_images_from_description (description):
     return len(re.findall(r'img src', description['text']))
     
@@ -88,6 +123,8 @@ def get_description_score(description):
     imgcount = count_images_from_description(description)
     return strcount + imgcount * 100
 
+=======
+>>>>>>> 428f02ec6412404eb53539184031e64e568c0451:meliscore/front/modelo.py
 
 if __name__ == '__main__':
     # URL ejemplo
