@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from scipy import average
+import requests
 
 URL_BASE = "https://api.mercadolibre.com/"
 
@@ -35,10 +36,10 @@ def score(itemid):
     }
     
     # traer descripción
-
-
-
-
+	url_description = URL_BASE + 'items/' + itemid + '/description'
+	response_description = requests.get (URLBASE + 'items/MLA554189135/description')
+	jresp=response_description.json()
+	description = jresp["plain_text"]
 
     partial["description"] = {
         "score": 0,
