@@ -6,13 +6,22 @@ import json
 URL_BASE = "https://api.mercadolibre.com/"
 
 
-def simplify_item(item):
+def simplify_item(item, prefix, sep):
     """
         Given an item result from the API
         it removes all nested information and returns
         a plain json that is more dataframe-friendly
     """
-    return item
+    items = []
+    for k, v in item.items():
+        new_key = prefix + sep + k if prefix else k
+        if isinstance(v, collections.MutableMapping):
+            items.extend(simplify_item(v, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+        
+
+    return dict(items)
 
 
 def create_dataset(category_id):
