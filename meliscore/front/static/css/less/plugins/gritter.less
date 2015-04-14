@@ -1,0 +1,129 @@
+/* -----------------------------------------
+   Gritter notifications
+----------------------------------------- */
+#gritter-notice-wrapper {
+	position:fixed;
+	top:20px;
+	right:20px;
+	width:301px;
+	z-index:9999;
+
+	&.top-left {
+		left: 20px;
+    	right: auto;
+	}
+	&.bottom-right {
+		top: auto;
+	    left: auto;
+	    bottom: 20px;
+	    right: 20px;
+	}
+	&.bottom-left {
+		top: auto;
+	    right: auto;
+	    bottom: 20px;
+	    left: 20px;
+	}
+
+	.gritter-item-wrapper {
+		position:relative;
+		margin:0 0 10px 0;
+
+		.gritter-item {
+			display:block;
+			background: @messenger-bg;
+			border: 1px solid darken(@messenger-bg, 15%);
+			color: @white;
+			padding:10px 11px;
+			font-size: 12px;
+			border-radius: @messenger-br;
+			.transition(background);
+			.transition-duration(.4s);
+
+			&:hover {
+				background: lighten(@messenger-bg, 5%);
+			}
+
+			p {
+				padding:0;
+				margin:0;
+				word-wrap:break-word;
+			}
+
+			.gritter-close {
+				position:absolute;
+				top:5px;
+				right:7px;
+				cursor:pointer;
+				i {
+					font-size: 16px;
+					color: @white;
+					.transition(background);
+					.transition-duration(.4s);
+				}
+				&:hover {
+					i {color: darken(@white, 3%);}
+				}
+			}
+
+			.gritter-image {
+				width:48px;
+				height:48px;
+				float:left;
+				border-radius: @messenger-image-br;
+			}
+
+			.gritter-icon {
+				margin-top: 12px;
+				margin-right: 10px;
+				float:left;
+				font-size: 32px;
+			}
+
+			.gritter-with-image {
+				width:220px;
+				float:right;
+				padding: 0;
+			}
+			.gritter-without-image { padding:0; }
+
+			.gritter-title {
+				font-size:14px;
+				font-weight:bold;
+				padding:0 0 5px 0;
+				display:block;
+				text-shadow:1px 1px 0 rgba(0,0,0,0.4);
+			}
+
+		}
+
+		&.success-notice {
+			.gritter-item {
+				background: @messenger-success-bg;
+				border: 1px solid darken(@messenger-success-bg, 15%);
+				&:hover {
+					background: lighten(@messenger-success-bg, 5%);
+				}
+			}
+		}
+		&.info-notice {
+			.gritter-item {
+				background: @messenger-info-bg;
+				border: 1px solid darken(@messenger-info-bg, 15%);
+				&:hover {
+					background: lighten(@messenger-info-bg, 5%);
+				}
+			}
+		}
+		&.error-notice {
+			.gritter-item {
+				background: @messenger-error-bg;
+				border: 1px solid darken(@messenger-error-bg, 15%);
+				&:hover {
+					background: lighten(@messenger-error-bg, 5%);
+				}
+			}
+		}
+	}
+
+}

@@ -7,16 +7,24 @@ import requests
 URL_BASE = "https://api.mercadolibre.com/"
 
 
-def get_item(itemid):
+def get_item(itemid, attributes=None):
     """
     This method makes a GET to the items/<itemid> and
     brings the JSON public info for the item.
     :param itemid: the id of the item
+        or a list of ids (in this case a multiid request is generated
+            and the result is a list of items)
     :return: the JSON returned by the API
     """
-
-    url = URL_BASE + "items/" + itemid
-    res = requests.get(url)
+    params = {}
+    if type(itemid) is list:
+        url = URL_BASE + "items/"
+        params["ids"] = ",".join(itemid)
+    else:
+        url = URL_BASE + "items/" + itemid
+    if attributes:
+        params['attributes'] = ",".join(attributes)
+    res = requests.get(url, params=params)
     item_data = res.json()
 
     return item_data

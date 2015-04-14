@@ -1,0 +1,201 @@
+/* -----------------------------------------
+   Bootstrap switch
+----------------------------------------- */
+@bootstrap-switch-name: bootstrap-switch;
+
+.@{bootstrap-switch-name} {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: @switchBorderRadius;
+  border: 1px solid;
+  border-color: @btn-default-border;
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  line-height: 8px;
+  .user-select(none);
+  vertical-align: middle;
+  min-width: 100px;
+  .transition(~"border-color ease-in-out .15s, box-shadow ease-in-out .15s");
+
+  &.@{bootstrap-switch-name}-mini {
+    min-width: 71px;
+
+    > div > span,
+    > div > label {
+      padding-bottom: 4px;
+      padding-top: 4px;
+      font-size: 10px;
+      line-height: 9px;
+    }
+
+    .@{bootstrap-switch-name}-mini-icons {
+      height: 1.20em;
+      line-height: 9px;
+      vertical-align: text-top;
+      text-align: center;
+      transform: scale(0.6);
+      margin-top: -1px;
+      margin-bottom: -1px;
+    }
+  }
+
+  &.@{bootstrap-switch-name}-small {
+    min-width: 79px;
+
+    > div > span,
+    > div > label {
+      padding-bottom: 3px;
+      padding-top: 3px;
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+
+  &.@{bootstrap-switch-name}-large {
+    min-width: 120px;
+
+    > div > span,
+    > div > label {
+      padding-bottom: 9px;
+      padding-top: 9px;
+      font-size: 16px;
+      line-height: normal;
+    }
+  }
+
+  &.@{bootstrap-switch-name}-animate {
+
+    > div {
+      .transition(margin-left 0.5s);
+    }
+  }
+
+  &.@{bootstrap-switch-name}-on {
+
+    > div {
+      margin-left: 1px;
+
+      > label {
+        .border-right-radius(@switchBorderRadius - 1);
+      }
+    }
+  }
+
+  &.@{bootstrap-switch-name}-off {
+
+    > div {
+      margin-left: -51%;
+
+      > label {
+        .border-left-radius(@switchBorderRadius - 1);
+      }
+    }
+  }
+
+  &.@{bootstrap-switch-name}-disabled,
+  &.@{bootstrap-switch-name}-readonly {
+    .opacity(.5);
+    cursor: default !important;
+
+    > div > span,
+    > div > label {
+      cursor: default !important;
+    }
+  }
+
+  &.@{bootstrap-switch-name}-focused {
+    @color-rgba: rgba(red(@input-border-focus), green(@input-border-focus), blue(@input-border-focus), .6);
+    outline: 0;
+  }
+
+  > div {
+    display: inline-block;
+    width: 150%;
+    top: 0;
+    border-radius: @switchBorderRadius;
+    .translate3d(0, 0, 0);
+
+    > span,
+    > label {
+      .box-sizing(border-box);
+      cursor: pointer;
+      display: inline-block !important;
+      height: 100%;
+      padding-bottom: 4px;
+      padding-top: 4px;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    > span {
+      text-align: center;
+      z-index: 1;
+      width: 33.333333333%;
+
+      &.@{bootstrap-switch-name}-handle-on {
+        color: #f00;
+        .border-left-radius(@switchBorderRadius - 1);
+        .border-right-radius(0);
+        margin-top: 1px;
+        margin-bottom: 1px;
+      }
+
+      &.@{bootstrap-switch-name}-handle-off {
+        color: #000;
+        background: @gray-lighter;
+        .border-right-radius(@switchBorderRadius - 1);
+        .border-left-radius(0);
+      }
+
+      &.@{bootstrap-switch-name}-primary {
+        color: #fff;
+        background: @btn-primary-bg;
+      }
+
+      &.@{bootstrap-switch-name}-info {
+        color: #fff;
+        background: @btn-info-bg;
+      }
+
+      &.@{bootstrap-switch-name}-success {
+        color: #fff;
+        background: @btn-success-bg;
+      }
+
+      &.@{bootstrap-switch-name}-warning {
+        background: @btn-warning-bg;
+        color: #fff;
+      }
+
+      &.@{bootstrap-switch-name}-danger {
+        color: #fff;
+        background: @btn-danger-bg;
+      }
+
+      &.@{bootstrap-switch-name}-default {
+        color: #000;
+        background: @gray-lighter;
+      }
+    }
+
+    > label {
+      text-align: center;
+      margin-top: -1px;
+      margin-bottom: -1px;
+      z-index: 100;
+      width: 33.333333333%;
+      color: @btn-default-color;
+      background: @btn-default-bg;
+    }
+  }
+
+  input[type='radio'],
+  input[type='checkbox'] {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    .opacity(0);
+    z-index: -1;
+  }
+}

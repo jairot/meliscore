@@ -1,0 +1,64 @@
+.ui-progressbar {
+	height: @progressbarHeight;
+	text-align: left;
+	overflow: hidden;
+	border: none !important;
+	border-radius: @progress-bar-border-radius;
+	color: @progress-bar-color !important;
+	background: @progress-bg !important;
+
+	.ui-progressbar-value {
+		margin: -1px;
+		height: 100%;
+		border: none !important;
+		background-color: @progress-bar-bg;
+	}
+
+	.ui-progressbar-overlay {
+		height: 100%;
+	}
+
+	&.progress-bar-teal {
+		.ui-progressbar-value{background-color: @progress-bar-teal-bg;}
+	}
+	&.progress-bar-success {
+		.ui-progressbar-value{background-color: @progress-bar-success-bg;}
+	}
+	&.progress-bar-warning {
+		.ui-progressbar-value{background-color: @progress-bar-warning-bg;}
+	}
+	&.progress-bar-danger {
+		.ui-progressbar-value{background-color: @progress-bar-danger-bg;}
+	}
+	&.progress-bar-info {
+		.ui-progressbar-value{background-color: @progress-bar-info-bg;}
+	}
+	&.progress-bar-dark {
+		.ui-progressbar-value{background-color: @progress-bar-dark-bg;}
+	}
+	&.progress-bar-info {
+		.ui-progressbar-value{background-color: @progress-bar-info-bg;}
+	}
+	&.progress-bar-purple {
+		.ui-progressbar-value{background-color: @progress-bar-purple-bg;}
+	}
+	&.progress-bar-brown {
+		.ui-progressbar-value{background-color: @progress-bar-brown-bg;}
+	}
+	&.progress-bar-yellow {
+		.ui-progressbar-value{background-color: @progress-bar-yellow-bg;}
+	}
+	&.progress-bar-magenta {
+		.ui-progressbar-value{background-color: @progress-bar-magenta-bg;}
+	}
+	&.progress-bar-lime {
+		.ui-progressbar-value{background-color: @progress-bar-lime-bg;}
+	}
+	&.progress-bar-pink {
+		.ui-progressbar-value{background-color: @progress-bar-pink-bg;}
+	}
+}
+
+.ui-progressbar-indeterminate .ui-progressbar-value {
+	background-image: none;
+}

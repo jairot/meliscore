@@ -1,10 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from scipy import average
-import requests
 import re
+
+from scipy import average
 from string import punctuation
 from queries import get_item, get_item_description, get_user
+
+steps = [(10, "Horrible!",
+         "Media pila, mi estimado amigo. Si querés vender más rápidamente, seguí nuestros consejos."),
+         (30, "Muy incompleto.", "Seguí nuestros consejos para mejorar tu publicación."),
+         (55, "Incompleto."," Seguí nuestros consejos para mejorar tu publicación."),
+         (80, "Bastante bien.", "Seguí nuestros consejos para mejorar tu publicación."),
+         (95, "Muy bien!", "Tu venta está prácticamente asegurada. Quedan detalles por pulir para que quede excelente."),
+         (100, "Excelente!!", "Talvez vos puedas darnos consejos a nosotros. Feliz venta!")]
+
 
 def generate_scores(itemid):
     """
@@ -22,20 +31,32 @@ def generate_scores(itemid):
     """
     partial = {}
 
-    # photo score 
+    # photo score
     item_data = get_item(itemid)
-    score, tip =  get_photo_score(item_data)
-    partial["photo"] = {"score": score, "tip": tip}
+    try:
+        score, tip =  get_photo_score(item_data)
+    except:
+        pass
+    else:
+        partial["fotos"] = {"score": int(score*100), "tip": tip}
 
     # description score
-    description = get_item_description(itemid)
-    score, tip = get_description_score(description)
-    partial["description"] = {"score": score, "tip": tip}
+    try:
+        description = get_item_description(itemid)
+        score, tip = get_description_score(description)
+    except:
+        pass
+    else:
+        partial["descripcion"] = {"score": int(score*100), "tip": tip}
 
     # user score
-    user_data = get_user(item_data['seller_id'])
-    score, tip = get_user_score(user_data)
-    partial["user_score"] = {"score": score, "tip": tip}
+    try:
+        user_data = get_user(item_data['seller_id'])
+        score, tip = get_user_score(user_data)
+    except:
+        pass
+    else:
+        partial["calificaciones"] = {"score": int(score*100), "tip": tip}
 
     # calcular score final
     result = {
@@ -53,9 +74,9 @@ def get_photo_score(item_data):
     if n_photos < 2:
         tip = "Muy pocas fotos!"
     elif n_photos < 4:
-        tip = "Bien, pero podrías agregar"
+        tip = "Bien, pero podrías agregar algunas fotos más!"
     else:
-        tip = "De diego!"
+        tip = "Perfecto, tienes la cantidad de fotos justa!"
 
     return score, tip
 
@@ -64,11 +85,11 @@ def get_user_score(user_data):
     user_level = int(user_data["seller_reputation"]["level_id"][0])
     score = user_level * 1.0 / 5
     if user_level < 3:
-        tip = "Flojísimo!"
+        tip = "Tienes que mejorar tu reputación como vendedor"
     elif user_level < 4:
-        tip = "Va queriendo"
+        tip = "Eres un buen vendedor pero podrias mejorar"
     else:
-        tip = "bien ahí!"
+        tip = "Tu reputación como vendedor es perfecta!"
 
     return score, tip
 
@@ -76,7 +97,7 @@ def get_user_score(user_data):
 def count_images_from_description(description):
     return len(re.findall(r'img src', description['text']))
 
-    
+
 def get_description_score(description):
     MAX_DESC_LEN = 1000
 
@@ -93,17 +114,24 @@ def get_description_score(description):
     desc_len = strcount + imgcount * 100
     score = min(desc_len, MAX_DESC_LEN) * 1.0 / MAX_DESC_LEN
     if score <= 0.5:
-        tip = "Explayate un poco más!"
+        tip = "La descripcion esta muy floja, explayate un poco más!"
     elif score <= 0.8:
-        tip = "Zafa"
+        tip = "La descripcion es suficiente pero podria estar más completa"
     else:
-        tip = "De lujo"
+        tip = "Tu descrición esta perfecta!"
 
     return score, tip
 
 
 def get_total_score(partial_scores):
-    return average([p["score"] for p in partial_scores.values()])
+    score = average([p["score"] for p in partial_scores.values()])
+    result = {"score": int(score)}
+    for step in steps:
+        if score < step[0]:
+            result["title"] = step[1]
+            result["subtitle"] = step[2]
+            break
+    return result
 
 
 if __name__ == '__main__':

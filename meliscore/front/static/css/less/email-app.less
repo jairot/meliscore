@@ -1,0 +1,228 @@
+/* -----------------------------------------
+   Email app styles
+----------------------------------------- */
+#email-sidebar {
+	width: @email-sidebar-width;
+	height: auto;
+	top: 0;
+	float: left;
+	background: @email-sidebar-bg;
+	border-radius: @border-radius-base;
+	border:1px solid @email-sidebar-border-color;
+	.transition(margin-left);
+	.transition-duration(0.4s);
+
+	&.email-sidebar-hide {
+		margin-left: -@email-sidebar-width*1.2;
+	}
+
+	&.email-sidebar-show {
+		margin-left: 0;
+	}
+
+	#email-nav {
+		padding: @email-nav-padding;
+		padding-top: 0;
+		li {
+			a {
+				padding: 6px 10px;
+				font-size: 14px;
+				color: @text-color;
+				.transition(background);
+				.transition-duration(0.4s);
+				background-color: transparent;
+				i {
+					margin-right: 10px;
+					margin-top: -2px;
+					.transition(color);
+					.transition-duration(0.4s);
+				}
+				.label {
+					right:8px;
+					top: 9px;
+					position: absolute;
+				}
+				.circle {
+					width: 16px;
+					height: 16px;
+					border-radius: 50%;
+					border: 3px solid @blue;
+					margin-right: 10px;
+					margin-top: 6px;
+					float: left;
+					&.color-red {border-color: @red;}
+					&.color-green {border-color: @green;}
+					&.color-teal {border-color: @teal;}
+					&.color-dark {border-color: @dark;}
+					&.color-orange {border-color: @orange;}
+					&.color-pink {border-color: @pink;}
+					&.color-purple {border-color: @purple;}
+					&.color-brown {border-color: @brown;}
+					&.color-magenta {border-color: @magenta;}
+					&.color-lime {border-color: @lime;}
+					&.color-yellow {border-color: @yellow;}
+				}
+				&:hover {
+					color: darken(@text-color, 15%);
+					i {color: @mainColor;}
+					background-color: @email-sidebar-link-hover;
+				}
+			}
+			&.nav-header {
+				display: block;
+				padding: 10px 10px 3px;
+				font-size: 12px;
+				font-weight: bold;
+				line-height: 20px;
+				color: darkne(@text-color, 10%);
+				text-transform: uppercase;
+			}
+		}
+	}
+}
+
+#email-content {
+	margin-left: @email-sidebar-width;
+	padding: @email-content-padding;
+	padding-left: 0;
+
+	.transition(margin-left);
+	.transition-duration(0.4s);
+
+	&.email-content-expand {
+		margin-left: 0;
+	}
+
+	&.email-content-contract {
+		margin-left: @email-sidebar-width;
+	}
+
+	&.email-content-offCanvas {
+		width: 100%;
+	}
+
+	.email-wrapper {
+		height: auto;
+		float: left;
+		width: 100%;
+		position: relative;
+		margin-top: -12px;
+
+		.email-toolbar {
+			.clearfix();
+			.email-controls {
+				float: left;
+			}
+			.email-pager {
+				list-style: none;
+				float: right;
+				li {
+					display: inline-block;
+					margin-right: 5px;
+					
+					&.pager-info {
+						color: lighten(@text-color, 15%);
+					}
+				}
+			}
+		}
+
+		.email-toggle {
+			position: relative;
+			padding: 7px 7px;
+			background-color: transparent;
+			background-image: none;
+			border: 1px solid @blue;
+			border-radius: @border-radius-base;
+			float: left;
+			margin-right: 10px;
+			.icon-bar {
+				display: block;
+				width: 22px;
+				height: 2px;
+				border-radius: 1px;
+				background-color: @blue;
+				margin-bottom: 2px;
+				margin-top: 2px;
+			}
+		}
+
+		.email-toolbar-search {
+			margin-bottom: 15px;
+		}
+
+		.email-list {
+			table {
+				.email-select {}
+				.email-subject {
+					font-weight: bold;
+					a {
+						color: @text-color;
+						text-decoration: none;
+					}
+					
+				}
+				.email-star {
+					i {
+						margin-top: -2px;
+						cursor: pointer;
+					}
+				}
+				.email-intro {
+					.small {font-size:90%;}
+					a {
+						color: @text-color;
+						text-decoration: none;
+					}
+				}
+				.email-date {
+					font-weight: bold;
+					font-size: 13px;
+				}
+			}
+		}
+
+		.email-read {
+			padding: 0 15px;
+			float: left;
+			width: 100%;
+			.clearfix();
+			.email-header {
+				float: left;
+				width: 100%;
+				margin-bottom: 5px;
+			}
+			.email-info-bar {
+				border-top: 1px solid @border-color;
+				float: left;
+				width: 100%;
+				padding-top: 10px;
+			}
+			.email-content {
+				float: left;
+				width: 100%;
+				margin-top: 25px;
+
+				.attached-files {
+					margin-top: 10px;
+					float: left;
+					width: 100%;
+					.list-group {
+						.list-group-item {
+							.clearfix();
+							span.label {
+								margin-top: 7px;
+								display: inline-block;
+							}
+						}
+					}
+				}
+			}
+		}
+		.email-write {
+			padding: 0;
+			float: left;
+			width: 100%;
+		}
+	}
+}

@@ -2,32 +2,99 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        {# metadata viewport #}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        {# metadata site #}
         <title>MELIScore - Mejorá tus chances de vender tu producto en MercadoLibre</title>
+        <meta name="author" content="Group2 - HackathonML - 04-11-15 - Cordoba">
+        <meta name="keywords" content="mercadolibre, score, item, articulo, publicacion, ventas, mejorar, vender rapido">
+
+        {# favicons #}
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
 
         {% block styles %}
+        {% comment %}
+
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        {% endcomment %}
 
+        {# google font: Raleway #}
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,800' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+        <link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
         <link rel="stylesheet" href="{% static 'css/meliscore_styles.css' %}">
         {% endblock styles %}
+
+        {% block extra_styles %}
+        {% endblock extra_styles %}
     </head>
 
     <body>
+        <header>
+        {% block header %}
+        <h1>MELIScore</h1>
+        <div class="ml_logo_container">
+            <img src="{% static 'img/ml_logo.png' %}" alt="">
+        </div>
+        {% endblock header %}
+        </header>
+
+        <div class="main-content">
         {% block content %}
             Hola! Este contenido debe ser reemplazado por un template hijo.
             Si ves esto, corre y patea a tu developer más cercano.
         {% endblock content %}
+        </div>
 
         {% block scripts %}
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        {#  jQuery #}
+        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
+        </script>
+        {#  jQuery-UI #}
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
+        </script>
+
+        <!-- Bootstrap plugins -->
+        <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
+        <!-- Core plugins ( not remove ) -->
+        <script src="{% static 'js/libs/modernizr.custom.js' %}"></script>
+        <!-- Handle responsive view functions -->
+        <script src="{% static 'js/jRespond.min.js' %}"></script>
+        <!-- Custom scroll for sidebars,tables and etc. -->
+        <!-- Highlight code blocks -->
+        <script src="{% static 'plugins/misc/highlight/highlight.pack.js' %}"></script>
+        <script src="{% static 'plugins/core/slimscroll/jquery.slimscroll.min.js' %}"></script>
+        <script src="{% static 'plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js' %}"></script>
+        <script src="{% static 'plugins/forms/maxlength/bootstrap-maxlength.js' %}"></script>
+        <script src="{% static 'plugins/forms/tags/jquery.tagsinput.min.js' %}"></script>
+        <script src="{% static 'plugins/forms/bootstrap-filestyle/bootstrap-filestyle.js' %}"></script>
+        <script src="{% static 'plugins/forms/maskedinput/jquery.maskedinput.js' %}"></script>
+        <script src="{% static 'plugins/forms/autosize/jquery.autosize.js' %}"></script>
+        <script src="{% static 'plugins/forms/select2/select2.js' %}"></script>
+        <script src="{% static 'plugins/forms/color-picker/spectrum.js' %}"></script>
+        <script src="{% static 'js/jquery.appStart.js' %}"></script>
+        <script src="{% static 'js/app.js' %}"></script>
         {% endblock scripts %}
+
+        {% block extra_scripts %}
+        {% endblock extra_scripts %}
     </body>
 </html>

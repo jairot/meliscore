@@ -14,9 +14,9 @@ def home(request, *args, **kwargs):
 
 
 def score(request, itemid=None, *args, **kwargs):
-
-    url = "http://articulo.mercadolibre.com.ar/MLA-548587141-iphone-5s-apple-16gb-retina-tactil-3g-liberado-chip-a6-ios7-_JM"
+    #url = "http://articulo.mercadolibre.com.ar/MLA-548587141-iphone-5s-apple-16gb-retina-tactil-3g-liberado-chip-a6-ios7-_JM"
     if not itemid:
+        url = request.POST["url"]
         try:
             itemid = re.findall("MLA-\d+", url)[0]
         except IndexError:
